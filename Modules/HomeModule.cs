@@ -1,17 +1,18 @@
-// using System;
-// using System.Collections.Generic;
-// using Nancy;
-// using Nancy.ViewEngines.Razor;
-//
-// namespace Shoes
-// {
-//   public class HomeModule : NancyModule
-//   {
-//     public HomeModule()
-//     {
-//       Get["/"] = _ => {
-//         return View["index.cshtml"];
-//       };
+using System;
+using System.Collections.Generic;
+using Nancy;
+using Nancy.ViewEngines.Razor;
+
+namespace Fighters
+{
+  public class HomeModule : NancyModule
+  {
+    public HomeModule()
+    {
+      Get["/"] = _ => {
+        return View["add_fighter.cshtml"];
+
+    };
 //
 //       Get["/stores"] = _ => {
 //       List<Store> AllStores = Store.GetAll();
@@ -122,6 +123,6 @@
 //     DeletedBrand.DeleteBrand();
 //     return View["index.cshtml"];
 //   };
-//     }
-//   }
-// }
+    }
+  }
+}
