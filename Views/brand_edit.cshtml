@@ -1,0 +1,16 @@
+<h1>Change Your Information Here:</h1>
+
+<form class="" action="/brands/edit/@Model.GetId()" method="post">
+  <input type="hidden" name="_method" value="PATCH">
+  <input name="brand-id" type="hidden" value="@Model.GetId()">
+  <input id="brand-name" name="brand-name" type="text">
+  <label for="brand-name"> Name</label>
+  <button type="submit">Complete</button>
+</form>
+
+<h2>Remove this Brand from all recollection?</h2>
+<h4>@Model.GetName()</h4>
+<form action="/brands/delete/@Model.GetId()" method="post">
+  <input type="hidden" name="_method" value="DELETE">
+  <button type="submit">Delete</button>
+</form>

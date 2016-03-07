@@ -1,0 +1,13 @@
+<h1> Stores </h1>
+
+<ul>
+@{ if (Model.Count != null) {
+  @foreach (var store in Model) {
+     <li><a href="/store/@store.GetId()">@store.GetName()</a> <a href="/stores/edit/@store.GetId()"> Edit Store Info</a> </li>
+    }
+  }
+}
+</ul>
+
+<a href="/"> Go Back</a>
+<a href="/stores/ClearAll">Delete All Stores</a>
