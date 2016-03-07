@@ -1,21 +1,17 @@
-<h1>Athens Shoe Supply</h1>
+<head>
+  <link href="../Content/css/bootstrap.css" rel="stylesheet" type="text/css">
+  <link href="../Content/css/styles.css" rel="stylesheet">
+  <title>"Fun" Fighters</title>
+</head>
 
-<a href="/stores">View All of the Stores</a>
-<a href="/brands">View All Brands</a>
+<h1>"FUN" FIGHTERS</h1><br>
 
-
-<h3>Add a Store</h3>
-<form action="/stores" method="post">
-<p>Store Name:</p>
-<input type="text" name="store-name">
-<br><br>
-<button type="submit">Add Store</button>
+<form action="/add_fighter">
+    <input class="btn btn-primary" type="submit" value="ADD FIGHTER">
 </form>
-
-<h3>Add a brand</h3>
-<form action="/brands" method="post">
-<p>Brand Name:</p>
-<input type="text" name="brand-name">
-<br><br>
-<button type="submit">Add Brand</button>
+<form action="/fight_setup">
+    <input class="btn btn-danger" type="submit" value="FIGHT!">
+</form><br>
+<form action="/leaderboard">
+    <input class="btn btn-warning" type="submit" value="LEADERBOARD">
 </form>

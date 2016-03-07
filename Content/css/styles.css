@@ -1,0 +1,90 @@
+body {
+  background-color: black;
+  color: white;
+  font-size: 30px;
+  text-align: center;
+}
+
+body input {
+  color: black;
+}
+
+body a {
+  text-decoration: none;
+  color: white;
+}
+
+select {
+  color: black;
+}
+
+.statContainer img {
+  margin-top: 10px;
+  width: 40px;
+}
+
+.statBox {
+  width: 60px;
+  height: 60px;
+  border-style: double;
+  border-color: grey;
+  border-width: 5px;
+}
+
+#headshot {
+  background-color: #B3ECFF;
+  width: 450px;
+  height: 450px;
+  float: right;
+}
+
+#headshot img {
+  width: 450px;
+  height: 450px;
+}
+
+#statOutput {
+  float: right;
+  width: 450px;
+  height: 100px;
+}
+
+#statOutput img {
+  width: 40px;
+  height: 40px;
+}
+
+#name {
+  float: left;
+}
+
+#statContainer {
+  float: left;
+}
+
+#menuContainer {
+  width: 1500px;
+  height: 800px;
+  padding: 30px;
+}
+
+#rightContainer {
+  padding-right: 300px;
+}
+
+#pointsRemainingContainer {
+  padding-right: 300px;
+}
+
+#submitButton {
+  padding: 20px;
+  margin-right: 300px;
+  float: right;
+  border-radius: 10px;
+  background-color: white;
+  color: black;
+}
+
+#imageSelection {
+  margin: 10px;
+}
