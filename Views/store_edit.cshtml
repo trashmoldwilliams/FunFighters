@@ -1,0 +1,16 @@
+<h1>Change Your Information Here:</h1>
+
+<form class="" action="/stores/edit/@Model.GetId()" method="post">
+  <input type="hidden" name="_method" value="PATCH">
+  <input name="store-id" type="hidden" value="@Model.GetId()">
+  <input id="store-name" name="store-name" type="text">
+  <label for="store-name"> Name</label>
+  <button type="submit">Complete</button>
+</form>
+
+<h2>Remove this Store from all recollection?</h2>
+<h4>@Model.GetName()</h4>
+<form action="/stores/delete/@Model.GetId()" method="post">
+  <input type="hidden" name="_method" value="DELETE">
+  <button type="submit">Delete</button>
+</form>
