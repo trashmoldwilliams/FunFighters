@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<fighters>
+  @foreach(var fighter in Model)
+  {
+    <fighter name="@fighter.GetName()" wins="@fighter.GetWins()" losses="@fighter.GetLosses()" healthpoints="@fighter.GetHp()" magicpoints="@fighter.GetMp()" attack="@fighter.GetAttack()" speed="@fighter.GetSpeed()" accuracy="@fighter.GetAccuracy()" luck="@fighter.GetLuck()"/>    
+  }
+</fighters>
