@@ -15,20 +15,29 @@ namespace Fighters
     }
 
     [Fact]
-    public void Test_Punches()
+    public void Test_Fight()
     {
+
       Fighter firstFighter = new Fighter("Midas",1,12,4,100,3,50,100);
       Fighter SecondFighter = new Fighter("Midas",1,12,4,5,0,10,100);
 
-      Punch jab = new Punch(1, "JAB", -0.5, 100);
-      Punch hook = new Punch(1, "HOOK", -1, 65);
-      Punch uppercut = new Punch(1, "UPPERCUT", -2, 30);
+      Punch jabPunch = new Punch(1, "JAB", -0.5, 100);
+      Punch hookPunch = new Punch(1, "HOOK", -1, 65);
+      Punch uppercutPunch = new Punch(1, "UPPERCUT", -2, 30);
+
+      Move jab = new Move(1, "JAB", "executePunch", jabPunch);
+      Move hook = new Move(2, "HOOK", "executePunch", hookPunch);
+      Move uppercut = new Move(3, "UPPERCUT", "executePunch", uppercutPunch);
+      Move block = new Move(4, "BLOCK", "executeBlock", new Punch(0, "PLACEHOLDER", 0, 0));
+      Move blind = new Move(5, "BLIND", "executeBlind", new Punch(0, "PLACEHOLDER", 0, 0));
+      Move lockon = new Move(6, "LOCKON", "executeLockon", new Punch(0, "PLACEHOLDER", 0, 0));
+      Move pyro = new Move(7, "PYRO", "executePyro", new Punch(0, "PLACEHOLDER", 0, 0));
 
       Battle currentBattle = new Battle(firstFighter, SecondFighter);
 
-      // double output = currentBattle.ExecuteLockon(firstFighter);
-
-      currentBattle.ExecuteLockon(firstFighter);
+      currentBattle.AddMoves(uppercut, block);
+      currentBattle.ExecuteMove(currentBattle.GetFirst(), currentBattle.GetSecond());
+      currentBattle.ExecuteMove(currentBattle.GetSecond(), currentBattle.GetFirst());
 
       Assert.Equal(72, firstFighter.GetAccuracy());
     }

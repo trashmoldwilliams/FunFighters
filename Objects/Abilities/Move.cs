@@ -9,9 +9,9 @@ namespace Fighters
     private int _id;
     private string _name;
     private string _method;
-    private string _punchType;
+    private Punch _punchType;
 
-    public Move(int Id, string Name, string Method, string PunchType)
+    public Move(int Id, string Name, string Method, Punch PunchType)
     {
       _id = Id;
       _name = Name;
@@ -21,13 +21,17 @@ namespace Fighters
 
     public static void DefineAll()
     {
-      Move jab = new Move(1, "JAB", "executePunch", "jab");
-      Move hook = new Move(2, "HOOK", "executePunch", "hook");
-      Move uppercut = new Move(3, "UPPERCUT", "executePunch", "uppercut");
-      Move block = new Move(4, "BLOCK", "executeBlock", "N/A");
-      Move blind = new Move(5, "BLIND", "executeBlind", "N/A");
-      Move lockon = new Move(6, "LOCKON", "executeLockon", "N/A");
-      Move pyro = new Move(7, "PYRO", "executePyro", "N/A");
+      Punch jabPunch = new Punch(1, "JAB", -0.5, 100);
+      Punch hookPunch = new Punch(1, "HOOK", -1, 65);
+      Punch uppercutPunch = new Punch(1, "UPPERCUT", -2, 30);
+
+      Move jab = new Move(1, "JAB", "executePunch", jabPunch);
+      Move hook = new Move(2, "HOOK", "executePunch", hookPunch);
+      Move uppercut = new Move(3, "UPPERCUT", "executePunch", uppercutPunch);
+      Move block = new Move(4, "BLOCK", "executeBlock", new Punch(0, "PLACEHOLDER", 0, 0));
+      Move blind = new Move(5, "BLIND", "executeBlind", new Punch(0, "PLACEHOLDER", 0, 0));
+      Move lockon = new Move(6, "LOCKON", "executeLockon", new Punch(0, "PLACEHOLDER", 0, 0));
+      Move pyro = new Move(7, "PYRO", "executePyro", new Punch(0, "PLACEHOLDER", 0, 0));
     }
 
     public string GetName()
@@ -40,7 +44,7 @@ namespace Fighters
       return _method;
     }
 
-    public string GetPunchType()
+    public Punch GetPunchType()
     {
       return _punchType;
     }
