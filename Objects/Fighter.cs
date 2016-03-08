@@ -171,7 +171,7 @@ namespace Fighters
       SqlDataReader rdr;
       conn.Open();
 
-      SqlCommand cmd = new SqlCommand("INSERT INTO fighters (name, image, hp, mp, attack, speed, accuracy, luck, wins, losses) OUTPUT INSERTED.id VALUES (@fighterName, @fighterImage, @fighterHp, @fighterMp, @fighterAttack, @fighterSpeed, @fighterAccuracy, @fighterLuck, @fighterWins, @fighterLoss)", conn);
+      SqlCommand cmd = new SqlCommand("INSERT INTO fighters (name, imageid, hp, mp, attack, speed, accuracy, luck, wins, losses) OUTPUT INSERTED.id VALUES (@fighterName, @fighterImage, @fighterHp, @fighterMp, @fighterAttack, @fighterSpeed, @fighterAccuracy, @fighterLuck, @fighterWins, @fighterLoss)", conn);
 
       SqlParameter nameParameter = new SqlParameter();
       nameParameter.ParameterName = "@fighterName";
