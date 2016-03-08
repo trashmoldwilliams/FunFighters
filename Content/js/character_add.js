@@ -103,8 +103,9 @@ $(document).ready (function(){
   $("#name").keyup(function(){
     newTotalPoints.formChecker();
   });
-  $("#imageSelection").change(function(){
-    console.log("do something");
+  $("#imageSelection").change(function(e){
+    var imageLocation = $("#imageSelection option:selected").attr("id");
+    $("#headshot").html("<img src='"+imageLocation+"'/>");
   });
   $("#health_increase").click(function(){
     newTotalPoints.hpIncrease();

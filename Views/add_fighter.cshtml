@@ -108,9 +108,12 @@
       </div>
       <div id="rightContainer" class="col-xs-6">
         <select id="imageSelection">
-
-          <option>Masked Murderer</option>
-          <option>Happy Kid</option>
+          @{
+            foreach (var image in Model)
+            {
+              <option value="@image.GetId()" id="@image.GetImageLocation()"> @image.GetName()</option>
+            }
+          }
         </select>
         <div id="headshot"><img src="../Content/images/7.png"></div>
         <div id="statOutput">
