@@ -15,12 +15,22 @@ namespace Fighters
     }
 
     [Fact]
-    public void Test_Jab()
+    public void Test_Punches()
     {
-      Fighter firstFighter = new Fighter("Midas","Image/path", 12,4,50,3,1000,50);
-      Fighter SecondFighter = new Fighter("Midas","Image/path", 12,4,5,10,10,50);
+      Fighter firstFighter = new Fighter("Midas","Image/path", 12,4,100,3,50,100);
+      Fighter SecondFighter = new Fighter("Midas","Image/path", 12,4,5,0,10,100);
+
+      Punch jab = new Punch(1, "JAB", -0.5, 100);
+      Punch hook = new Punch(1, "HOOK", -1, 65);
+      Punch uppercut = new Punch(1, "UPPERCUT", -2, 30);
+
       Battle currentBattle = new Battle(firstFighter, SecondFighter);
-      Assert.Equal(24, currentBattle.Jab(firstFighter, SecondFighter));
+
+      // double output = currentBattle.ExecuteLockon(firstFighter);
+
+      currentBattle.ExecuteLockon(firstFighter);
+
+      Assert.Equal(72, firstFighter.GetAccuracy());
     }
   }
 }
