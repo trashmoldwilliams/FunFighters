@@ -69,18 +69,42 @@ namespace Fighters
       {
         if(randomNumber <= user.GetLuck())
         {
-          return target.GetAccuracy() * 0.2;
+          double output = target.GetAccuracy() * 0.2;;
           target.SetAccuracy(target.GetAccuracy() * 0.8);
+          return output;
         }
         else
         {
-          return target.GetAccuracy() * 0.1;
+          double output = target.GetAccuracy() * 0.1;
           target.SetAccuracy(target.GetAccuracy() * 0.9);
+          return output;
         }
       }
       else
       {
         return 999;
+      }
+    }
+
+    public double ExecuteLockon(Fighter user)
+    {
+      user.SetMp(user.GetMp() - 2);
+
+      Random rnd = new Random();
+      int randomNumber = rnd.Next(1,100);
+      // Console.WriteLine(user.GetAccuracy() + (user.GetAccuracy() * 0.4));
+
+      if(randomNumber <= user.GetLuck())
+      {
+        double output = user.GetAccuracy() * 0.4;
+        user.SetAccuracy(user.GetAccuracy() + (user.GetAccuracy() * 0.4));
+        return output;
+      }
+      else
+      {
+        double output = user.GetAccuracy() * 0.2;
+        user.SetAccuracy(user.GetAccuracy() + (user.GetAccuracy() * 0.2));
+        return output;
       }
     }
   }
