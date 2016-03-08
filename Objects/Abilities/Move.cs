@@ -21,9 +21,9 @@ namespace Fighters
 
     public static void DefineAll()
     {
-      Punch jabPunch = new Punch(1, "JAB", -0.5, 100);
-      Punch hookPunch = new Punch(1, "HOOK", -1, 65);
-      Punch uppercutPunch = new Punch(1, "UPPERCUT", -2, 30);
+      Punch jabPunch = new Punch(1, "JAB", 0.5, 100);
+      Punch hookPunch = new Punch(1, "HOOK", 1, 65);
+      Punch uppercutPunch = new Punch(1, "UPPERCUT", 2, 30);
 
       Move jab = new Move(1, "JAB", "executePunch", jabPunch);
       Move hook = new Move(2, "HOOK", "executePunch", hookPunch);

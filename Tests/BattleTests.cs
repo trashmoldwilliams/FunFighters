@@ -18,12 +18,12 @@ namespace Fighters
     public void Test_Fight()
     {
 
-      Fighter firstFighter = new Fighter("Midas",1,12,4,100,3,50,100);
-      Fighter SecondFighter = new Fighter("Midas",1,12,4,5,0,10,100);
+      Fighter firstFighter = new Fighter("Midas",1,100,20,20,2,1000,100);
+      Fighter SecondFighter = new Fighter("Midas",1,100,4,5,1,1000,100);
 
-      Punch jabPunch = new Punch(1, "JAB", -0.5, 100);
-      Punch hookPunch = new Punch(1, "HOOK", -1, 65);
-      Punch uppercutPunch = new Punch(1, "UPPERCUT", -2, 30);
+      Punch jabPunch = new Punch(1, "JAB", 0.5, 100);
+      Punch hookPunch = new Punch(1, "HOOK", 1, 65);
+      Punch uppercutPunch = new Punch(1, "UPPERCUT", 2, 30);
 
       Move jab = new Move(1, "JAB", "executePunch", jabPunch);
       Move hook = new Move(2, "HOOK", "executePunch", hookPunch);
@@ -35,11 +35,11 @@ namespace Fighters
 
       Battle currentBattle = new Battle(firstFighter, SecondFighter);
 
-      currentBattle.AddMoves(uppercut, block);
+      currentBattle.AddMoves(block, uppercut);
       currentBattle.ExecuteMove(currentBattle.GetFirst(), currentBattle.GetSecond());
       currentBattle.ExecuteMove(currentBattle.GetSecond(), currentBattle.GetFirst());
 
-      Assert.Equal(72, firstFighter.GetAccuracy());
+      Assert.Equal(0, firstFighter.GetHp());
     }
   }
 }
