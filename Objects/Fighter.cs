@@ -155,6 +155,16 @@ namespace Fighters
       _defense = Defense;
     }
 
+    public double GetBurn()
+    {
+      return _burn;
+    }
+
+    public void SetBurn(double Burn)
+    {
+      _burn = Burn;
+    }
+
     public void Save()
     {
       SqlConnection conn = DB.Connection();
