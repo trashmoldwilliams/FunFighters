@@ -16,6 +16,7 @@ namespace Fighters
     {
       _leftFighter = LeftFighter;
       _rightFighter = RightFighter;
+      _moveDocket = new List<Move> {};
       _isFirst = new Fighter("Placeholder",1,1,1,1,1,1,1);
       _isSecond = new Fighter("Placeholder",1,1,1,1,1,1,1);
     }
@@ -33,6 +34,16 @@ namespace Fighters
     public List<Move> GetMoveDocket()
     {
       return _moveDocket;
+    }
+
+    public Fighter GetFirst()
+    {
+      return _isFirst;
+    }
+
+    public Fighter GetSecond()
+    {
+      return _isSecond;
     }
 
     public void SetFirst(Fighter First)
