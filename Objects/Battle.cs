@@ -249,5 +249,41 @@ namespace Fighters
         return 999;
       }
     }
+
+    public string AIMove()
+    {
+      Fighter leftFighter = GetLeftFighter();
+      Fighter rightFighter = GetRightFighter();
+
+      if(leftFighter.GetBurn() == 0 && rightFighter.GetMp() >= 6)
+      {
+        return "burn";
+      }
+      else if ((rightFighter.GetAccuracy() - leftFighter.GetSpeed()) < -20 && rightFighter.GetMp() >= 2)
+      {
+        return "lockon";
+      }
+      else if (leftFighter.GetHp() <= (rightFighter.GetAttack() * 0.5) && rightFighter.GetBurn() == 0)
+      {
+        return "jab";
+      }
+      else if (leftFighter.GetBurn() > 0 && rightFighter.GetHp() >= (rightFighter.GetHp() * 0.15) && rightFighter.GetSpeed() > leftFighter.GetSpeed())
+      {
+        return "block";
+      }
+      else if (rightFighter.GetSpeed() > leftFighter.GetAccuracy() && rightFighter.GetSpeed() > leftFighter.GetSpeed() && leftFighter.GetAccuracy() - rightFighter.GetSpeed() > -50)
+      {
+        return "blind";
+      }
+      else if (rightFighter.GetAccuracy() - leftFighter.GetSpeed() > 25)
+      {
+        return "uppercut";
+      }
+      else
+      {
+        return "hook";
+      }
+    }
+
   }
 }

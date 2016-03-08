@@ -18,8 +18,8 @@ namespace Fighters
     public void Test_Fight()
     {
 
-      Fighter firstFighter = new Fighter("Midas",1,100,20,20,2,1000,100);
-      Fighter SecondFighter = new Fighter("Midas",1,100,4,5,1,1000,100);
+      Fighter firstFighter = new Fighter("Midas",1,250,5,50,50,50,50);
+      Fighter SecondFighter = new Fighter("Midas",1,250,10,50,50,50,50);
 
       Punch jabPunch = new Punch(1, "JAB", 0.5, 100);
       Punch hookPunch = new Punch(1, "HOOK", 1, 65);
@@ -39,7 +39,7 @@ namespace Fighters
       currentBattle.ExecuteMove(currentBattle.GetFirst(), currentBattle.GetSecond());
       currentBattle.ExecuteMove(currentBattle.GetSecond(), currentBattle.GetFirst());
 
-      Assert.Equal(0, firstFighter.GetHp());
+      Assert.Equal("hook", currentBattle.AIMove());
     }
   }
 }
