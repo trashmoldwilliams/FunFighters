@@ -11,19 +11,19 @@ namespace Fighters
     private int _wins;
     private int _losses;
     private string _images;
-    private int _hp;
-    private int _maxhp;
-    private int _mp;
-    private int _maxmp;
-    private int _attack;
-    private int _speed;
-    private int _accuracy;
-    private int _luck;
+    private double _hp;
+    private double _maxhp;
+    private double _mp;
+    private double _maxmp;
+    private double _attack;
+    private double _speed;
+    private double _accuracy;
+    private double _luck;
 
-    private int _defense;
-    private int _burn;
+    private double _defense;
+    private double _burn;
 
-    public Fighter(string Name, string Image, int Hp, int Mp, int Attack, int Speed, int Accuracy, int Luck, int Wins = 0, int Losses = 0, int Id = 0)
+    public Fighter(string Name, string Image, double Hp, double Mp, double Attack, double Speed, double Accuracy, double Luck, int Wins = 0, int Losses = 0, int Id = 0)
     {
       _id = Id;
       _name = Name;
@@ -79,37 +79,41 @@ namespace Fighters
     {
       return _images;
     }
-    public int GetHp()
+    public double GetHp()
     {
       return _hp;
     }
-    public int GetMaxHp()
+    public double GetMaxHp()
     {
       return _maxhp;
     }
-    public int GetMp()
+    public double GetMp()
     {
       return _mp;
     }
-    public int GetMaxMp()
+    public double GetMaxMp()
     {
       return _maxmp;
     }
-    public int GetAttack()
+    public double GetAttack()
     {
       return _attack;
     }
-    public int GetSpeed()
+    public double GetSpeed()
     {
       return _speed;
     }
-    public int GetAccuracy()
+    public double GetAccuracy()
     {
       return _accuracy;
     }
-    public int GetLuck()
+    public double GetLuck()
     {
       return _luck;
+    }
+    public double GetDefense()
+    {
+      return _defense;
     }
     public int GetWins()
     {
@@ -118,6 +122,11 @@ namespace Fighters
     public int GetLosses()
     {
       return _losses;
+    }
+
+    public void SetHp(double Hp)
+    {
+      _hp = Hp;
     }
 
     public void Save()
