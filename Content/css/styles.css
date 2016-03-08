@@ -85,6 +85,19 @@ select {
   color: black;
 }
 
+#submitButton:disabled {
+  padding: 20px;
+  margin-right: 300px;
+  float: right;
+  border-radius: 10px;
+  background-color: gray;
+  color: black;
+}
+
 #imageSelection {
   margin: 10px;
+}
+
+#pointTextspan{
+  font-size: 20px;
 }

@@ -1,7 +1,8 @@
 <head>
   <link href="../Content/css/bootstrap.css" rel="stylesheet" type="text/css">
   <link href="../Content/css/styles.css" rel="stylesheet">
-  <script src="../Scripts/bootstrap.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+  <script src="../Content/js/character_add.js" Stype="text/javascript"></script>
   <title>"Fun" Fighters</title>
 </head>
 
@@ -12,20 +13,20 @@
     <div class="row">
       <div class="col-xs-6">
         <input id="name" name="name" type="text" maxlength="20" placeholder="NAME"><br><br>
-        <span id="pointsRemainingContainer"><span id="pointsRemaining">0</span><span> STAT POINTS REMAINING</span></span>
+        <span id="pointsRemainingContainer"><span id="pointsRemaining"></span><span id ="pointTextspan"> STAT POINTS REMAINING</span></span>
         <div class="statContainer">
           <div class="row">
             <div class="col-xs-3">
               <h2>HEALTH</h2>
             </div>
             <div class="col-xs-1">
-              <a href="stat_decrease/1"><img src="../Content/UI/left-arrow.png"></a>
+              <img id="health_decrease" src="../Content/UI/left-arrow.png">
             </div>
             <div class="statBox col-md-2">
               <span id="hp">1</span>
             </div>
             <div class="col-xs-1">
-              <a href="stat_increase/1"><img src="../Content/UI/right-arrow.png"></a>
+              <img id="health_increase" src="../Content/UI/right-arrow.png">
             </div>
           </div>
 
@@ -34,13 +35,13 @@
               <h2>MAGIC</h2>
             </div>
             <div class="col-xs-1">
-              <a href="stat_decrease/1"><img src="../Content/UI/left-arrow.png"></a>
+              <img id="magic_decrease" src="../Content/UI/left-arrow.png">
             </div>
             <div class="statBox col-md-2">
-              <span id="hp">1</span>
+              <span id="mp">1</span>
             </div>
             <div class="col-xs-1">
-              <a href="stat_increase/1"><img src="../Content/UI/right-arrow.png"></a>
+              <img id="magic_increase" src="../Content/UI/right-arrow.png">
             </div>
           </div>
 
@@ -49,13 +50,13 @@
               <h2>ATTACK</h2>
             </div>
             <div class="col-xs-1">
-              <a href="stat_decrease/1"><img src="../Content/UI/left-arrow.png"></a>
+              <img id="attack_decrease" src="../Content/UI/left-arrow.png">
             </div>
             <div class="statBox col-md-2">
-              <span id="hp">1</span>
+              <span id="attack">1</span>
             </div>
             <div class="col-xs-1">
-              <a href="stat_increase/1"><img src="../Content/UI/right-arrow.png"></a>
+              <img id="attack_increase" src="../Content/UI/right-arrow.png">
             </div>
           </div>
 
@@ -64,13 +65,13 @@
               <h2>SPEED</h2>
             </div>
             <div class="col-xs-1">
-              <a href="stat_decrease/1"><img src="../Content/UI/left-arrow.png"></a>
+              <img id="speed_decrease" src="../Content/UI/left-arrow.png">
             </div>
             <div class="statBox col-md-2">
-              <span id="hp">1</span>
+              <span id="speed">1</span>
             </div>
             <div class="col-xs-1">
-              <a href="stat_increase/1"><img src="../Content/UI/right-arrow.png"></a>
+              <img id="speed_increase" src="../Content/UI/right-arrow.png">
             </div>
           </div>
 
@@ -79,13 +80,13 @@
               <h2>ACCURACY</h2>
             </div>
             <div class="col-xs-1">
-              <a href="stat_decrease/1"><img src="../Content/UI/left-arrow.png"></a>
+              <img id="accuracy_decrease" src="../Content/UI/left-arrow.png">
             </div>
             <div class="statBox col-md-2">
-              <span id="hp">1</span>
+              <span id="accuracy">1</span>
             </div>
             <div class="col-xs-1">
-              <a href="stat_increase/1"><img src="../Content/UI/right-arrow.png"></a>
+              <img id="accuracy_increase" src="../Content/UI/right-arrow.png">
             </div>
           </div>
 
@@ -94,13 +95,13 @@
               <h2>LUCK</h2>
             </div>
             <div class="col-xs-1">
-              <a href="stat_decrease/1"><img src="../Content/UI/left-arrow.png"></a>
+              <img id="luck_decrease" src="../Content/UI/left-arrow.png">
             </div>
             <div class="statBox col-md-2">
-              <span id="hp">1</span>
+              <span id="luck">1</span>
             </div>
             <div class="col-xs-1">
-              <a href="stat_increase/1"><img src="../Content/UI/right-arrow.png"></a>
+              <img id="luck_increase" src="../Content/UI/right-arrow.png">
             </div>
           </div>
         </div>
