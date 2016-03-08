@@ -10,7 +10,7 @@ namespace Fighters
     private string _name;
     private int _wins;
     private int _losses;
-    private string _images;
+    private int _imageId;
     private double _hp;
     private double _maxhp;
     private double _mp;
@@ -24,7 +24,7 @@ namespace Fighters
     private double _defense;
     private double _burn;
 
-    public Fighter(string Name, string Image, double Hp, double Mp, double Attack, double Speed, double Accuracy, double Luck, int Wins = 0, int Losses = 0, int Id = 0)
+    public Fighter(string Name, int ImageId, double Hp, double Mp, double Attack, double Speed, double Accuracy, double Luck, int Wins = 0, int Losses = 0, int Id = 0)
     {
       _id = Id;
       _name = Name;
@@ -32,7 +32,7 @@ namespace Fighters
       _maxhp = Hp;
       _mp = Mp;
       _maxmp = Mp;
-      _images = Image;
+      _imageId = ImageId;
       _attack = Attack;
       _speed = Speed;
       _accuracy = Accuracy;
@@ -56,7 +56,7 @@ namespace Fighters
           Fighter newFighter = (Fighter) otherFighter;
           bool idEquality = this.GetId() == newFighter.GetId();
           bool nameEquality = this.GetName() == newFighter.GetName();
-          bool imageEquality = this.GetImage() == newFighter.GetImage();
+          bool imageEquality = this.GetImageId() == newFighter.GetImageId();
           bool hpEquality = this.GetHp() == newFighter.GetHp();
           bool mpEquality = this.GetMp() == newFighter.GetMp();
           bool attackEquality = this.GetAttack() == newFighter.GetAttack();
@@ -76,9 +76,9 @@ namespace Fighters
     {
       return _name;
     }
-    public string GetImage()
+    public int GetImageId()
     {
-      return _images;
+      return _imageId;
     }
     public double GetHp()
     {
@@ -180,7 +180,7 @@ namespace Fighters
 
       SqlParameter ImageParameter = new SqlParameter();
       ImageParameter.ParameterName = "@fighterImage";
-      ImageParameter.Value = this.GetImage();
+      ImageParameter.Value = this.GetImageId();
       cmd.Parameters.Add(ImageParameter);
 
       SqlParameter hpParameter = new SqlParameter();
@@ -264,7 +264,7 @@ namespace Fighters
       string foundFighterName = null;
       int foundWins = 0;
       int foundLosses = 0;
-      string foundImages =  null;
+      int foundImageId =  0;
       int foundHp = 0;
       int foundMp = 0;
       int foundAttack = 0;
@@ -278,7 +278,7 @@ namespace Fighters
         foundFighterName = rdr.GetString(1);
         foundWins = rdr.GetInt32(2);
         foundLosses = rdr.GetInt32(3);
-        foundImages =  rdr.GetString(4);
+        foundImageId =  rdr.GetInt32(4);
         foundHp = rdr.GetInt32(5);
         foundMp = rdr.GetInt32(6);
         foundAttack = rdr.GetInt32(7);
@@ -286,7 +286,7 @@ namespace Fighters
         foundAccuracy = rdr.GetInt32(9);
         foundLuck = rdr.GetInt32(10);
       }
-      Fighter foundFighter = new Fighter(foundFighterName, foundImages, foundHp, foundMp, foundAttack, foundSpeed, foundAccuracy, foundAccuracy, foundWins, foundLosses, foundFighterId);
+      Fighter foundFighter = new Fighter(foundFighterName, foundImageId, foundHp, foundMp, foundAttack, foundSpeed, foundAccuracy, foundAccuracy, foundWins, foundLosses, foundFighterId);
 
       if (rdr != null)
       {
@@ -350,14 +350,14 @@ namespace Fighters
         string foundFighterName = rdr.GetString(1);
         int foundWins = rdr.GetInt32(2);
         int foundLosses = rdr.GetInt32(3);
-        string foundImages =  rdr.GetString(4);
+        int foundImageId =  rdr.GetInt32(4);
         int foundHp = rdr.GetInt32(5);
         int foundMp = rdr.GetInt32(6);
         int foundAttack = rdr.GetInt32(7);
         int foundSpeed = rdr.GetInt32(8);
         int foundAccuracy = rdr.GetInt32(9);
         int foundLuck = rdr.GetInt32(10);
-        Fighter foundFighter = new Fighter(foundFighterName, foundImages, foundHp, foundMp, foundAttack, foundSpeed, foundAccuracy, foundAccuracy, foundWins, foundLosses, foundFighterId);
+        Fighter foundFighter = new Fighter(foundFighterName, foundImageId, foundHp, foundMp, foundAttack, foundSpeed, foundAccuracy, foundAccuracy, foundWins, foundLosses, foundFighterId);
         allFighters.Add(foundFighter);
       }
 
