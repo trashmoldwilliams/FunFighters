@@ -16,8 +16,8 @@ namespace Fighters
     {
       _leftFighter = LeftFighter;
       _rightFighter = RightFighter;
-      _isFirst = new Fighter("Placeholder","Image/path", 1,1,1,1,1,1);
-      _isSecond = new Fighter("Placeholder","Image/path", 1,1,1,1,1,1);
+      _isFirst = new Fighter("Placeholder",1,1,1,1,1,1,1);
+      _isSecond = new Fighter("Placeholder",1,1,1,1,1,1,1);
     }
 
     public Fighter GetLeftFighter()

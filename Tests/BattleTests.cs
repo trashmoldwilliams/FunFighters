@@ -17,8 +17,8 @@ namespace Fighters
     [Fact]
     public void Test_Punches()
     {
-      Fighter firstFighter = new Fighter("Midas","Image/path", 12,4,100,3,50,100);
-      Fighter SecondFighter = new Fighter("Midas","Image/path", 12,4,5,0,10,100);
+      Fighter firstFighter = new Fighter("Midas",1,12,4,100,3,50,100);
+      Fighter SecondFighter = new Fighter("Midas",1,12,4,5,0,10,100);
 
       Punch jab = new Punch(1, "JAB", -0.5, 100);
       Punch hook = new Punch(1, "HOOK", -1, 65);

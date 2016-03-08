@@ -24,15 +24,15 @@ namespace Fighters
     [Fact]
     public void Test_FighterReturnTrueForSameName()
     {
-      Fighter firstFighter = new Fighter("Midas","Image/path", 12,4,5,3,5,5);
-      Fighter SecondFighter = new Fighter("Midas","Image/path", 12,4,5,3,5,5);
+      Fighter firstFighter = new Fighter("Midas",1,12,4,5,3,5,5);
+      Fighter SecondFighter = new Fighter("Midas",1,12,4,5,3,5,5);
       Assert.Equal(firstFighter, SecondFighter);
     }
         [Fact]
     public void Test_Save_SavesFighterToDatabase()
     {
       //Arrange
-      Fighter testFighter = new Fighter("Midas","Image/path", 12,4,5,3,5,5);
+      Fighter testFighter = new Fighter("Midas",1,12,4,5,3,5,5);
       testFighter.Save();
 
       //Act
@@ -48,7 +48,7 @@ namespace Fighters
     public void Test_Save_AssignsIdToFighterObject()
     {
       //Arrange
-      Fighter testFighter = new Fighter("Midas","Image/path", 12,4,5,3,5,5);
+      Fighter testFighter = new Fighter("Midas",1,12,4,5,3,5,5);
       testFighter.Save();
 
       //Act
@@ -64,7 +64,7 @@ namespace Fighters
     public void Test_Find_FindsFighterInDatabase()
     {
       //Arrange
-      Fighter testFighter = new Fighter("Midas","Image/path", 12,4,5,3,5,5);
+      Fighter testFighter = new Fighter("Midas",1,12,4,5,3,5,5);
       testFighter.Save();
 
       //Act
