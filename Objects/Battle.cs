@@ -35,6 +35,16 @@ namespace Fighters
       return _moveDocket;
     }
 
+    public Fighter GetFirst()
+    {
+      return _isFirst;
+    }
+
+    public Fighter GetSecond()
+    {
+      return _isSecond;
+    }
+
     public void SetFirst(Fighter First)
     {
       _isFirst = First;

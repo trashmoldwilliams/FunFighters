@@ -20,13 +20,6 @@ namespace Fighters
 
     }
 
-    public static void DefineAll()
-    {
-      Punch jab = new Punch(1, "JAB", -0.5, 100);
-      Punch hook = new Punch(1, "HOOK", -1, 65);
-      Punch uppercut = new Punch(1, "UPPERCUT", -2, 30);
-    }
-
     public double GetMultiplier()
     {
       return _damageMultiplier;
