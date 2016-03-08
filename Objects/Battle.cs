@@ -57,5 +57,31 @@ namespace Fighters
         return 0.65;
       }
     }
+
+    public double ExecuteBlind(Fighter user, Fighter target)
+    {
+      user.SetMp(user.GetMp() - 1);
+
+      Random rnd = new Random();
+      int randomNumber = rnd.Next(1,100);
+
+      if(randomNumber <= (80 + user.GetAccuracy() - target.GetSpeed()))
+      {
+        if(randomNumber <= user.GetLuck())
+        {
+          return target.GetAccuracy() * 0.2;
+          target.SetAccuracy(target.GetAccuracy() * 0.8);
+        }
+        else
+        {
+          return target.GetAccuracy() * 0.1;
+          target.SetAccuracy(target.GetAccuracy() * 0.9);
+        }
+      }
+      else
+      {
+        return 999;
+      }
+    }
   }
 }

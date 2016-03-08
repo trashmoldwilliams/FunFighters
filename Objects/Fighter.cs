@@ -130,6 +130,26 @@ namespace Fighters
       _hp = Hp;
     }
 
+    public void SetMp(double Mp)
+    {
+      _mp = Mp;
+    }
+
+    public void SetAttack(double Attack)
+    {
+      _attack = Attack;
+    }
+
+    public void SetSpeed(double Speed)
+    {
+      _speed = Speed;
+    }
+
+    public void SetAccuracy(double Accuracy)
+    {
+      _accuracy = Accuracy;
+    }
+
     public void SetDefense(double Defense)
     {
       _defense = Defense;

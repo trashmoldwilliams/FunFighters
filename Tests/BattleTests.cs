@@ -17,7 +17,7 @@ namespace Fighters
     [Fact]
     public void Test_Punches()
     {
-      Fighter firstFighter = new Fighter("Midas","Image/path", 12,4,100,3,1000,0);
+      Fighter firstFighter = new Fighter("Midas","Image/path", 12,4,100,3,1000,50);
       Fighter SecondFighter = new Fighter("Midas","Image/path", 12,4,5,0,10,100);
 
       Punch jab = new Punch(1, "JAB", -0.5, 100);
@@ -27,7 +27,8 @@ namespace Fighters
       Battle currentBattle = new Battle(firstFighter, SecondFighter);
 
       currentBattle.ExecuteBlock(SecondFighter);
-      Assert.Equal(24, currentBattle.ExecutePunch(firstFighter, SecondFighter, hook));
+      Assert.Equal(9, currentBattle.ExecuteBlind(firstFighter, SecondFighter));
+      Assert.Equal(3, firstFighter.GetMp());
     }
   }
 }
