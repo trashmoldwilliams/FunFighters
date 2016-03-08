@@ -18,6 +18,9 @@ select {
   color: black;
 }
 
+
+/*Add Fighter*/
+
 .statContainer img {
   margin-top: 10px;
   width: 40px;
@@ -100,4 +103,57 @@ select {
 
 #pointTextspan{
   font-size: 20px;
+}
+
+
+/*Fight Menu*/
+
+.fighterHeadshot {
+  background-color: #B3ECFF;
+  width: 350px;
+  height: 350px;
+}
+
+.fighterHeadshot img {
+  width: 350px;
+  height: 350px;
+}
+
+.fighterStats {
+  font-size: 25px;
+  width: 450px;
+  height: 100px;
+}
+
+.fighterStats img {
+  width: 30px;
+  height: 30px;
+}
+
+.lowerStats {
+  margin-left: 30px;
+}
+
+.moveSelector {
+  background-color: red;
+  color: black;
+  width: 250px;
+  height: 50px;
+  margin-left: 50px;
+}
+
+#gameLog {
+  margin-left: 100px;
+  margin-top: 350px;
+  border-style: double;
+  border-color: grey;
+  border-width: 5px;
+  width: 700px;
+  height: 300px;
+}
+
+#vsHeader {
+  font-size: 100px;
+  margin-left: 35px;
+  margin-top: 150px;
 }

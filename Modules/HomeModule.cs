@@ -10,8 +10,7 @@ namespace Fighters
     public HomeModule()
     {
       Get["/"] = _ => {
-        
-        return View["add_fighter.cshtml"];
+        return View["fight.cshtml"];
       };
       Get["/fighters.xml"] = _ => {
         return View["get_fighters.cshtml",Fighter.GetAll()];
