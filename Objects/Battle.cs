@@ -15,29 +15,46 @@ namespace Fighters
       _rightFighter = RightFighter;
     }
 
-    public double Jab(Fighter user, Fighter target)
+    public double ExecutePunch(Fighter user, Fighter target, Punch punch)
     {
       Random rnd = new Random();
-      int randomnumba = rnd.Next(1, 100);
+      int randomNumber = rnd.Next(1, 100);
 
-      if(randomnumba <= (100 + user.GetAccuracy() - target.GetSpeed()))
+      if(randomNumber <= (punch.GetAccuracy() + user.GetAccuracy() - target.GetSpeed()))
       {
         double damage = 0;
 
-        if(randomnumba <= user.GetLuck())
+        if(randomNumber <= user.GetLuck())
         {
-          damage = 2 * (user.GetAttack() * 0.5);
+          damage = 2 * (user.GetAttack() * punch.GetMultiplier());
         }
         else
         {
-          damage = user.GetAttack() * 0.5;
+          damage = user.GetAttack() * punch.GetMultiplier();
         }
-        target.SetHp(target.GetHp() - (damage - target.GetDefense()));
-        return (damage - target.GetDefense());
+        target.SetHp(target.GetHp() - (damage * target.GetDefense()));
+        return (damage * target.GetDefense());
       }
       else
       {
         return 999;
+      }
+    }
+
+    public double ExecuteBlock(Fighter user)
+    {
+      Random rnd = new Random();
+      int randomNumber = rnd.Next(1,100);
+
+      if(randomNumber <= user.GetLuck())
+      {
+        user.SetDefense(0.1);
+        return 0.1;
+      }
+      else
+      {
+        user.SetDefense(0.65);
+        return 0.65;
       }
     }
   }

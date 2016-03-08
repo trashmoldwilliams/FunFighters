@@ -20,6 +20,7 @@ namespace Fighters
     private double _accuracy;
     private double _luck;
 
+    // private Move _currentMove;
     private double _defense;
     private double _burn;
 
@@ -127,6 +128,11 @@ namespace Fighters
     public void SetHp(double Hp)
     {
       _hp = Hp;
+    }
+
+    public void SetDefense(double Defense)
+    {
+      _defense = Defense;
     }
 
     public void Save()
