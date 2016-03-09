@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <title>Image Types</title>
+  </head>
+  <body>
+    <div class="container">
+      <a href="/">Return Home</a><br>
+      <a href="/Image/Create">Add a New Image</a><br>
+      <a href="/Image/Delete">Delete All Images</a>
+      @{
+        if(Model!=null)
+        {
+          if(Model is string)
+          {
+            <h3>Successfully Deleted All Images</h3>
+          }
+          else if (Model.Count == 0)
+          {
+            <h3>Please Add a Image</h3>
+          }
+          else
+          {
+            foreach(var item in Model)
+            {
+              <h3><a href="/Image/@item.GetId()">@item.GetName()</a></h3>
+              <h5><a href="/Image/Delete/@item.GetId()">Delete</a></h5>
+            }
+          }
+        }
+      }
+    </div>
+  </body>
+</html>

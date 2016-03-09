@@ -8,7 +8,7 @@
 
 <h1>NEW FIGHTER</h1><br>
 
-<form action="/confirm_fighter">
+<form action="/confirm_fighter" method="post">
   <div id="menuContainer">
     <div class="row">
       <div class="col-xs-6">
@@ -23,6 +23,7 @@
               <img id="health_decrease" src="../Content/UI/left-arrow.png">
             </div>
             <div class="statBox col-md-2">
+              <input type="hidden" name="input_hp" id="input_hp" value="1">
               <span id="hp">1</span>
             </div>
             <div class="col-xs-1">
@@ -38,6 +39,7 @@
               <img id="magic_decrease" src="../Content/UI/left-arrow.png">
             </div>
             <div class="statBox col-md-2">
+              <input type="hidden" name="input_mp" id="input_mp" value="1">
               <span id="mp">1</span>
             </div>
             <div class="col-xs-1">
@@ -53,6 +55,7 @@
               <img id="attack_decrease" src="../Content/UI/left-arrow.png">
             </div>
             <div class="statBox col-md-2">
+              <input type="hidden" name="input_attack" id="input_attack" value="1">
               <span id="attack">1</span>
             </div>
             <div class="col-xs-1">
@@ -68,6 +71,7 @@
               <img id="speed_decrease" src="../Content/UI/left-arrow.png">
             </div>
             <div class="statBox col-md-2">
+              <input type="hidden" name="input_speed" id="input_speed" value="1">
               <span id="speed">1</span>
             </div>
             <div class="col-xs-1">
@@ -83,6 +87,7 @@
               <img id="accuracy_decrease" src="../Content/UI/left-arrow.png">
             </div>
             <div class="statBox col-md-2">
+              <input type="hidden" name="input_accuracy" id="input_accuracy" value="1">
               <span id="accuracy">1</span>
             </div>
             <div class="col-xs-1">
@@ -98,6 +103,7 @@
               <img id="luck_decrease" src="../Content/UI/left-arrow.png">
             </div>
             <div class="statBox col-md-2">
+              <input type="hidden" name="input_luck" id="input_luck" value="1">
               <span id="luck">1</span>
             </div>
             <div class="col-xs-1">
@@ -107,12 +113,15 @@
         </div>
       </div>
       <div id="rightContainer" class="col-xs-6">
-        <select id="imageSelection">
-
-          <option>Masked Murderer</option>
-          <option>Happy Kid</option>
+        <select name="imageSelection" id="imageSelection">
+          @{
+            foreach (var image in Model)
+            {
+              <option value="@image.GetId()" id="@image.GetImageLocation()"> @image.GetName()</option>
+            }
+          }
         </select>
-        <div id="headshot"><img src="../Content/images/7.png"></div>
+        <div id="headshot"><img src="@Model[0].GetImageLocation()"></div>
         <div id="statOutput">
           <div class="row">
             <div class="col-xs-6">

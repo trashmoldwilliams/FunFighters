@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <title>Image Update</title>
+  </head>
+  <body>
+    <div class="container">
+      <a href="/Image">Return Home</a><br>
+      @{
+        if(Model!=null)
+        {
+          <h1>Image: @Model["image"].GetName()</h1>
+          <form class="" action="/Image/Update/@Model["image"].GetId()" method="post">
+            <input type="text" name="name" value="@Model["image"].GetName()">
+            <input type="text" name="path" value="@Model["image"].GetImageLocation()">
+            <button type="Submit" name="button">Update Image</button>
+          </form>
+        }
+      }
+    </div>
+  </body>
+</html>

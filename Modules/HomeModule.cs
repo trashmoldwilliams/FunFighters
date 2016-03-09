@@ -10,13 +10,57 @@ namespace Fighters
     public HomeModule()
     {
       Get["/"] = _ => {
-        return View["fight.cshtml"];
+        return View["index.cshtml"];
+      };
+      Get["/add_fighter"] = _ => {
+        List<Image> allImages = Image.GetAll();
+        return View["add_fighter.cshtml", allImages];
+      };
+      Post["/confirm_fighter"] =_=> {
+        Fighter newFighter = new Fighter(Request.Form["name"], Request.Form["imageSelection"], Request.Form["input_hp"], Request.Form["input_mp"], Request.Form["input_attack"], Request.Form["input_speed"], Request.Form["input_accuracy"], Request.Form["input_luck"]);
+        newFighter.Save();
+        return View ["index.cshtml"];
+        newFighter.Save();
       };
       Get["/fighters.xml"] = _ => {
         return View["get_fighters.cshtml",Fighter.GetAll()];
       };
       Get["/fight"] = _ => {
         return View["fight.cshtml"];
+      };
+      Post["/fight"] = _ => {
+        return View["fight.cshtml"];
+      };
+      Get["/image"] = _ => {
+        return View["image.cshtml",Image.GetAll()];
+      };
+      Post["/image"] = _ => {
+        Image newImage = new Image(Request.Form["name"],Request.Form["path"]);
+        newImage.Save();
+        return View["image.cshtml", Image.GetAll()];
+      };
+      Get["/image/{id}"]  = parameters => {
+        Image newImage = Image.Find(parameters.id);
+        Dictionary<string,object> myDictionary = new Dictionary<string,object>{};
+        myDictionary.Add("image",newImage);
+        return View["imageView.cshtml",myDictionary];
+      };
+      Post["/image/Update/{id}"]  = parameters => {
+        Image newImage = Image.Find(parameters.id);
+        newImage.Update(Request.Form["name"],Request.Form["path"]);
+        return View["image.cshtml",Image.GetAll()];
+      };
+      Get["/image/Delete/{id}"]  = parameters => {
+        Image newImage = Image.Find(parameters.id);
+        newImage.Delete();
+        return View["image.cshtml",Image.GetAll()];
+      };
+      Get["/image/Create"]  = _ => {
+        return View["imageCreate.cshtml"];
+      };
+      Get["/image/Delete"] = _ => {
+        Image.DeleteAll();
+        return View["image.cshtml",  "delete"];
       };
     }
   }
