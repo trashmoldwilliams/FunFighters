@@ -25,12 +25,79 @@ $(document).ready (function(){
         //draw player status
         player1.draw();
         player2.draw();
+        battle = new Battle (player1, player2);
+        $("#jab").click(function(){
+          battle.AddMoves(jab, battle.AI());
+          battle.ExecuteMove(battle.isFirst, battle.isSecond);
+          battle.ExecuteMove(battle.isSecond, battle.isFirst);
+          player1.draw();
+          player2.draw();
+        });
+
+        $("#hook").click(function(){
+          battle.AddMoves(hook, battle.AI());
+          battle.ExecuteMove(battle.isFirst, battle.isSecond);
+          battle.ExecuteMove(battle.isSecond, battle.isFirst);
+          player1.draw();
+          player2.draw();
+        });
+
+        $("#uppercut").click(function(){
+          battle.AddMoves(uppercut, battle.AI());
+          battle.ExecuteMove(battle.isFirst, battle.isSecond);
+          battle.ExecuteMove(battle.isSecond, battle.isFirst);
+          player1.draw();
+          player2.draw();
+        });
+
+        $("#block").click(function(){
+          battle.AddMoves(block, battle.AI());
+          battle.ExecuteMove(battle.isFirst, battle.isSecond);
+          battle.ExecuteMove(battle.isSecond, battle.isFirst);
+          player1.draw();
+          player2.draw();
+        });
+
+        $("#blind").click(function(){
+          battle.AddMoves(blind, battle.AI());
+          battle.ExecuteMove(battle.isFirst, battle.isSecond);
+          battle.ExecuteMove(battle.isSecond, battle.isFirst);
+          player1.draw();
+          player2.draw();
+        });
+
+        $("#lockon").click(function(){
+          battle.AddMoves(lockon, battle.AI());
+          battle.ExecuteMove(battle.isFirst, battle.isSecond);
+          battle.ExecuteMove(battle.isSecond, battle.isFirst);
+          player1.draw();
+          player2.draw();
+        });
+
+        $("#burn").click(function(){
+          battle.AddMoves(burn, battle.AI());
+          battle.ExecuteMove(battle.isFirst, battle.isSecond);
+          battle.ExecuteMove(battle.isSecond, battle.isFirst);
+          player1.draw();
+          player2.draw();
+        });
+
+        $("#frost").click(function(){
+          battle.AddMoves(frost, battle.AI());
+          battle.ExecuteMove(battle.isFirst, battle.isSecond);
+          battle.ExecuteMove(battle.isSecond, battle.isFirst);
+          player1.draw();
+          player2.draw();
+        });
       });
+
+
     });
 });
 
 var player1 = null;
 var player2 = null;
+var battle = null;
 
 var Fighter = function(hp,mp,attack,speed,accuracy,luck,player){
   this.hp = (40 * hp) + 140;
@@ -100,6 +167,7 @@ var block = new Move(4, "executeBlock", "N/A");
 var blind = new Move(5, "executeBlind", "N/A");
 var lockon = new Move(6, "executeLockon", "N/A");
 var burn = new Move(7, "executeBurn", "N/A");
+var frost = new Move(8, "executeFrost", "N/A");
 
 
 Battle.prototype.AddMoves = function (LeftMove, RightMove) {
@@ -155,15 +223,15 @@ var executePunch = function(User, Target, Punch) {
     var damage = 0;
 
     if(randomNumber <= User.luck) {
-      damage = 2 * (User.attack * Punch.multiplier)
+      damage = Math.floor(2 * (User.attack * Punch.multiplier));
     } else {
-      damage = User.attack * Punch.multiplier;
+      damage = Math.floor(User.attack * Punch.multiplier);
     }
-    target.hp -= damage * target.defense;
-    if(target.hp < 0) {
-      target.hp = 0;
+    Target.hp -= Math.floor(damage * Target.defense);
+    if(Target.hp < 0) {
+      Target.hp = 0;
     }
-    return damage * target.defense;
+    return Math.floor(damage * Target.defense);
 
   } else {
     return "miss";
@@ -174,9 +242,9 @@ var executeBlock = function(User) {
   randomNumber =Math.floor((Math.random() * 100) + 1);
 
   if(randomNumber <= User.luck) {
-    user.defense = 0.1;
+    User.defense = 0.1;
   } else {
-    user.defense = 0.65;
+    User.defense = 0.65;
   }
 }
 
@@ -189,12 +257,12 @@ var executeBlind = function(User, Target) {
     var output = 0;
 
     if(randomNumber <= User.luck) {
-      output = Target.accuracy * 0.2;
-      Target.accuracy = Target.accuracy * 0.8;
+      output = Math.floor(Target.accuracy * 0.2);
+      Target.accuracy = Math.floor(Target.accuracy * 0.8);
       return output;
     } else {
-      output = Target.accuracy * 0.1;
-      Target.accuracy = Target.accuracy * 0.9;
+      output = Math.floor(Target.accuracy * 0.1);
+      Target.accuracy = Math.floor(Target.accuracy * 0.9);
       return output;
     }
   } else {
@@ -211,20 +279,20 @@ var executeLockon = function(User) {
   var output2 = 0;
 
   if(randomNumber <= User.luck) {
-    output1 = User.accuracy * 0.4;
-    User.accuracy = User.accuracy * 0.4;
+    output1 = Math.floor(User.accuracy * 0.4);
+    User.accuracy = Math.floor(User.accuracy * 0.4);
     output.push(output1);
-    output2 = User.luck * 0.4;
-    User.luck = User.luck * 0.4;
+    output2 = Math.floor(User.luck * 0.4);
+    User.luck = Math.floor(User.luck * 0.4);
     output.push(output2);
     return output;
 
   } else {
-    output1 = User.accuracy * 0.2;
-    User.accuracy = User.accuracy * 0.2;
+    output1 = Math.floor(User.accuracy * 0.2);
+    User.accuracy = Math.floor(User.accuracy * 0.2);
     output.push(output1);
-    output2 = User.luck * 0.2;
-    User.luck = User.luck * 0.2;
+    output2 = Math.floor(User.luck * 0.2);
+    User.luck = Math.floor(User.luck * 0.2);
     output.push(output2);
     return output;
   }
@@ -239,13 +307,13 @@ var executeBurn = function(User, Target) {
     var output = 0;
 
     if(randomNumber <= User.luck) {
-      output = Target.attack * 0.3;
-      Target.attack = Target.attack * 0.7;
+      output = Math.floor(Target.attack * 0.3);
+      Target.attack = Math.floor(Target.attack * 0.7);
       Target.burn += 30;
       return output;
     } else {
-      output = Target.attack * 0.6;
-      Target.attack = Target.attack * 0.4;
+      output = Math.floor(Target.attack * 0.6);
+      Target.attack = Math.floor(Target.attack * 0.4);
       Target.burn += 15;
       return output;
     }
@@ -264,20 +332,20 @@ var executeFrost = function(User, Target) {
 
   if(randomNumber <= (80 + User.accuracy - Target.speed)) {
     if(randomNumber <= User.luck) {
-      output1 = Target.hp * 0.2;
-      Target.hp = Target.hp * 0.8;
+      output1 = Math.floor(Target.hp * 0.2);
+      Target.hp = Math.floor(Target.hp * 0.8);
       output.push(output1);
-      output2 = Target.speed * 0.4;
-      Target.speed = Target.speed * 0.6;
+      output2 = Math.floor(Target.speed * 0.4);
+      Target.speed = Math.floor(Target.speed * 0.6);
       output.push(output2);
       return output;
 
     } else {
-      output1 = Target.hp * 0.1;
-      Target.hp = Target.hp * 0.9;
+      output1 = Math.floor(Target.hp * 0.1);
+      Target.hp = Math.floor(Target.hp * 0.9);
       output.push(output1);
-      output2 = Target.speed * 0.2;
-      Target.speed = Target.speed * 0.8;
+      output2 = Math.floor(Target.speed * 0.2);
+      Target.speed = Math.floor(Target.speed * 0.8);
       output.push(output2);
       return output;
     }
@@ -286,7 +354,7 @@ var executeFrost = function(User, Target) {
   }
 }
 
-var AI = function() {
+Battle.prototype.AI = function() {
   player = this.leftFighter;
   AI = this.rightFighter;
 
