@@ -100,15 +100,17 @@ Battle.prototype.ExecuteMove = function (User, Opponent) {
   var move = this.moveDocket[0];
 
   if(move.method === "executePunch") {
-    this.executePunch(User, Opponent, move.punchType);
+    executePunch(User, Opponent, move.punchType);
   } else if (move.method === "executeBlock"){
-    this.executeBlock(User);
+    executeBlock(User);
   } else if {move.method === "executeBlind"){
-    this.executeBlind(User, Opponent);
+    executeBlind(User, Opponent);
   } else if (move.method === "executeLockon"){
-    this.executeLockon(User);
+    executeLockon(User);
+  } else if (move.method === "executeBurn"){
+    executeBurn(User, Opponent);
   } else {
-    this.executeBurn(User, Opponent);
+    executeFrost(User, Opponent);
   }
 
   this.moveDocket.splice(0, 1);
@@ -133,8 +135,7 @@ var executePunch = function(User, Target, Punch) {
   }
 }
 
-var executeBlock = function(User)
-{
+var executeBlock = function(User) {
   randomNumber =Math.floor((Math.random() * 100) + 1);
 
   if(randomNumber <= User.luck) {
@@ -144,8 +145,11 @@ var executeBlock = function(User)
   }
 }
 
-var executeBlind = function(User, Target)
-{
+var executeBlind = function(User, Target) {
+  User.mp -= 1;
+
+  randomNumber =Math.floor((Math.random() * 100) + 1);
+
   if(randomNumber <= (80 + User.accuracy - Target.speed)) {
     var output = 0;
 
@@ -158,15 +162,115 @@ var executeBlind = function(User, Target)
       Target.accuracy = Target.accuracy * 0.9;
       return output;
     }
-    target.hp -= damage * target.defense;
-    return damage * target.defense;
-
   } else {
     return "miss";
   }
 }
 
-var
+var executeLockon = function(User) {
+  User.mp -= 2;
+
+  randomNumber =Math.floor((Math.random() * 100) + 1);
+  var output = [];
+  var output1 = 0;
+  var output2 = 0;
+
+  if(randomNumber <= User.luck) {
+    output1 = User.accuracy * 0.4;
+    User.accuracy = User.accuracy * 0.4;
+    output.push(output1);
+    output2 = User.luck * 0.4;
+    User.luck = User.luck * 0.4;
+    output.push(output2);
+    return output;
+
+  } else {
+    output1 = User.accuracy * 0.2;
+    User.accuracy = User.accuracy * 0.2;
+    output.push(output1);
+    output2 = User.luck * 0.2;
+    User.luck = User.luck * 0.2;
+    output.push(output2);
+    return output;
+  }
+}
+
+var executePyro = function(User, Target) {
+  User.mp -= 5;
+
+  randomNumber =Math.floor((Math.random() * 100) + 1);
+
+  if(randomNumber <= (80 + User.accuracy - Target.speed)) {
+    var output = 0;
+
+    if(randomNumber <= User.luck) {
+      output = Target.attack * 0.3;
+      Target.attack = Target.attack * 0.7;
+      Target.burn += 60;
+      return output;
+    } else {
+      output = Target.attack * 0.6;
+      Target.attack = Target.attack * 0.4;
+      Target.burn += 60;
+      return output;
+    }
+  } else {
+    return "miss";
+  }
+}
+
+var executeFrost = function(User, Target) {
+  User.mp -= 3;
+
+  randomNumber =Math.floor((Math.random() * 100) + 1);
+  var output = [];
+  var output1 = 0;
+  var output2 = 0;
+
+  if(randomNumber <= (80 + User.accuracy - Target.speed)) {
+    if(randomNumber <= User.luck) {
+      output1 = Target.hp * 0.2;
+      Target.hp = Target.hp * 0.8;
+      output.push(output1);
+      output2 = Target.speed * 0.4;
+      Target.speed = Target.speed * 0.6;
+      output.push(output2);
+      return output;
+
+    } else {
+      output1 = Target.hp * 0.1;
+      Target.hp = Target.hp * 0.9;
+      output.push(output1);
+      output2 = Target.speed * 0.2;
+      Target.speed = Target.speed * 0.8;
+      output.push(output2);
+      return output;
+    } else {
+      return "miss";
+    }
+  }
+}
+
+var AI = function() {
+  player = this.leftFighter;
+  AI = this.rightFighter;
+
+  if(player.burn == 0 && AI.mp >= 6) {
+    return burn;
+  } else if ((AI.accuracy - player.speed) < -20 && AI.mp >= 2) {
+    return lockon;
+  } else if (player.hp <= (AI.attack * 0.5) && AI.burn == 0) {
+    return jab;
+  } else if (player.burn > 0 && AI.hp >= (AI.hp * 0.15) && AI.speed > player.speed) {
+    return block;
+  } else if (AI.speed > player.accuracy && AI.speed > player.speed && player.accuracy - AI.speed > -50) {
+    return blind;
+  } else if (AI.accuracy - player.speed > 25) {
+    return uppercut;
+  } else {
+    return hook;
+  }
+}
 
 var newFighterChecker = function(){
   var player1 = $("#player1").val();
