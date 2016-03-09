@@ -16,6 +16,12 @@ namespace Fighters
         List<Image> allImages = Image.GetAll();
         return View["add_fighter.cshtml", allImages];
       };
+      Post["/confirm_fighter"] =_=> {
+        Fighter newFighter = new Fighter(Request.Form["name"], Request.Form["imageSelection"], Request.Form["input_hp"], Request.Form["input_mp"], Request.Form["input_attack"], Request.Form["input_speed"], Request.Form["input_accuracy"], Request.Form["input_luck"]);
+        newFighter.Save();
+        return View ["index.cshtml"];
+        newFighter.Save();
+      };
       Get["/fighters.xml"] = _ => {
         return View["get_fighters.cshtml",Fighter.GetAll()];
       };
