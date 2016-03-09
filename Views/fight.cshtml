@@ -2,11 +2,131 @@
 <html>
   <head>
     <meta charset="utf-8">
+    <link href="../Content/css/bootstrap.css" rel="stylesheet" type="text/css">
+    <link href="../Content/css/styles.css" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
     <script type="text/javascript" src="/Content/js/scripts.js"></script>
-    <title>FIGHTERSSSSS</title>
+    <title>"Fun" Fighters</title>
   </head>
   <body>
-    <h1>Check the console log</h1>
+    <div class="row">
+      <div class="col-xs-1"></div>
+      <div class="col-xs-3">
+        <h1>BIG BILLY</h1>
+        <div id="fighterLeft" class="fighterHeadshot"><img src="../Content/images/3.png"></div>
+        <div class="fighterStats">
+          <div class="row">
+            <div class="col-xs-5">
+              <span>HP: <span><span id="hpOutput">100</span><span> / <span id="hpOutput">100</span>
+            </div>
+            <div class="col-xs-5">
+              <span>MP: <span><span id="mpOutput">100</span><span> / <span id="hpOutput">100</span>
+            </div>
+          </div>
+          <div class="lowerStats">
+            <div class="row">
+              <div class="col-xs-2">
+                <img src="../Content/UI/attack.png">
+              </div>
+              <div class="col-xs-2">
+                <span id="attackOutput">100</span>
+              </div>
+              <div class="col-xs-2">
+                <img src="../Content/UI/speed.png">
+              </div>
+              <div class="col-xs-2">
+                <span id="speedOutput">100</span>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-xs-2">
+                <img src="../Content/UI/accuracy.png">
+              </div>
+              <div class="col-xs-2">
+                <span id="accuracyOutput">100</span>
+              </div>
+              <div class="col-xs-2">
+                <img src="../Content/UI/luck.png">
+              </div>
+              <div class="col-xs-2">
+                <span id="luckOutput">100</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="moveContainer">
+          <div id="jab" class="moveSelector">
+            <h2>JAB</h2>
+          </div>
+          <div id="jab" class="moveSelector">
+            <h2>HOOK</h2>
+          </div>
+          <div id="jab" class="moveSelector">
+            <h2>UPPERCUT</h2>
+          </div>
+          <div id="jab" class="moveSelector">
+            <h2>BLOCK</h2>
+          </div>
+          <div id="jab" class="moveSelector">
+            <h2>BLIND - 1MP</h2>
+          </div>
+          <div id="jab" class="moveSelector">
+            <h2>LOCKON - 2MP</h2>
+          </div>
+          <div id="jab" class="moveSelector">
+            <h2>BURN - 6MP</h2>
+          </div>
+        </div>
+      </div>
+      <div class="col-xs-4">
+        <h1 id="vsHeader">VS</h1>
+        <div id="gameLog"></div>
+      </div>
+      <div class="col-xs-3">
+        <h1>THE DRAC</h1>
+        <div id="fighterLeft" class="fighterHeadshot"><img src="../Content/images/13.png"></div>
+        <div class="fighterStats">
+          <div class="row">
+            <div class="col-xs-5">
+              <span>HP: <span><span id="hpOutput">100</span><span> / <span id="hpOutput">100</span>
+            </div>
+            <div class="col-xs-5">
+              <span>MP: <span><span id="mpOutput">100</span><span> / <span id="hpOutput">100</span>
+            </div>
+          </div>
+          <div class="lowerStats">
+            <div class="row">
+              <div class="col-xs-2">
+                <img src="../Content/UI/attack.png">
+              </div>
+              <div class="col-xs-2">
+                <span id="attackOutput">100</span>
+              </div>
+              <div class="col-xs-2">
+                <img src="../Content/UI/speed.png">
+              </div>
+              <div class="col-xs-2">
+                <span id="speedOutput">100</span>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-xs-2">
+                <img src="../Content/UI/accuracy.png">
+              </div>
+              <div class="col-xs-2">
+                <span id="accuracyOutput">100</span>
+              </div>
+              <div class="col-xs-2">
+                <img src="../Content/UI/luck.png">
+              </div>
+              <div class="col-xs-2">
+                <span id="luckOutput">100</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-xs-1"></div>
+    </div>
   </body>
 </html>
