@@ -135,11 +135,11 @@ select {
 }
 
 .moveSelector {
-  background-color: red;
   color: black;
   width: 250px;
   height: 50px;
   margin-left: 50px;
+  line-height: 50px;
 }
 
 #gameLog {
@@ -156,4 +156,32 @@ select {
   font-size: 100px;
   margin-left: 35px;
   margin-top: 150px;
+}
+
+#jab {
+  background-color: red;
+}
+
+#hook {
+  background-color: orange;
+}
+
+#uppercut {
+  background-color: #ffff4d;
+}
+
+#block {
+  background-color: green;
+}
+
+#blind {
+  background-color: #0066ff;
+}
+
+#lockon {
+  background-color: #993399;
+}
+
+#burn {
+  background-color: violet;
 }
