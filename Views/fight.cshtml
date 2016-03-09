@@ -5,15 +5,50 @@
     <link href="../Content/css/bootstrap.css" rel="stylesheet" type="text/css">
     <link href="../Content/css/styles.css" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
-    <script type="text/javascript" src="/Content/js/scripts.js"></script>
+    <script type="text/javascript" src="/Content/js/fight.js"></script>
     <title>"Fun" Fighters</title>
   </head>
   <body>
-    <div class="row">
+
+    <!-- Choose Fighter Menu -->
+
+    <div id="chooseFighterMenu">
+      <h1>Fight Setup</h1>
+      <div class="row">
+        <div class="col-xs-6">
+          <h2>Choose Fighter</h2>
+          <select id="player1" name="player1">
+            <option value="default">Choose Fighter</option>
+            @{
+              foreach(var fighter in Model){
+                <option value="@fighter.GetId()">@fighter.GetName()</option>
+              }
+            }
+          </select>
+        </div>
+        <div class="col-xs-6">
+          <h2>Choose Opponent</h2>
+          <select id="player2" name="player2">
+            <option value="default">Choose Opponent</option>
+            @{
+              foreach(var fighter in Model){
+                <option value="@fighter.GetId()">@fighter.GetName()</option>
+              }
+            }
+          </select>
+        </div>
+        <button id="submitFightButton" type="submit">FIGHT!</button>
+      </div>
+    </div>
+
+
+    <!--Fight UI -->
+
+    <div id="fightUI" class="row">
       <div class="col-xs-1"></div>
       <div class="col-xs-3">
-        <h1>BIG BILLY</h1>
-        <div id="fighterLeft" class="fighterHeadshot"><img src="../Content/images/17.png"></div>
+        <h1 id="player1Name"></h1>
+        <div id="fighterLeft" class="fighterHeadshot"><img src="" id="player1Image"></div>
         <div class="fighterStats">
           <div class="row">
             <div class="col-xs-5">
@@ -83,8 +118,8 @@
         <div id="gameLog"></div>
       </div>
       <div class="col-xs-3">
-        <h1>THE DRAC</h1>
-        <div id="fighterLeft" class="fighterHeadshot"><img src="../Content/images/13.png"></div>
+        <h1 id="player2Name"></h1>
+        <div id="fighterLeft" class="fighterHeadshot"><img src="" id="player2Image"></div>
         <div class="fighterStats">
           <div class="row">
             <div class="col-xs-5">

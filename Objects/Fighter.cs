@@ -28,7 +28,7 @@ namespace Fighters
     {
       _id = Id;
       _name = Name;
-      _hp = Hp;
+      _hp = 120 + (Hp * 20);
       _maxhp = Hp;
       _mp = Mp;
       _maxmp = Mp;
@@ -242,6 +242,37 @@ namespace Fighters
       {
         conn.Close();
       }
+    }
+
+    public string GetImageLocation()
+    {
+      SqlConnection conn = DB.Connection();
+      SqlDataReader rdr = null;
+      conn.Open();
+
+      SqlCommand cmd = new SqlCommand("SELECT image_path FROM fighter_images WHERE id = @ImageId;", conn);
+      SqlParameter ImageIdParameter = new SqlParameter();
+      ImageIdParameter.ParameterName = "@ImageId";
+      ImageIdParameter.Value = this._imageId;
+      cmd.Parameters.Add(ImageIdParameter);
+      rdr = cmd.ExecuteReader();
+
+      string foundImageLocation = null;
+
+      while(rdr.Read())
+      {
+        foundImageLocation = rdr.GetString(0);
+      }
+
+      if (rdr != null)
+      {
+        rdr.Close();
+      }
+      if (conn != null)
+      {
+        conn.Close();
+      }
+      return foundImageLocation;
     }
 
     public static void DeleteAll()
