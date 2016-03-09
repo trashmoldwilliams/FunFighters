@@ -203,3 +203,7 @@ select {
   background-color: gray;
   color: black;
 }
+
+#endFightMenu {
+  display: none;
+}
