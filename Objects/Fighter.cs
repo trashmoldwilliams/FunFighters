@@ -155,6 +155,11 @@ namespace Fighters
       _defense = Defense;
     }
 
+    public void SetLuck(double Luck)
+    {
+      _luck = Luck;
+    }
+
     public double GetBurn()
     {
       return _burn;

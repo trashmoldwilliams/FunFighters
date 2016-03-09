@@ -198,24 +198,35 @@ namespace Fighters
       }
     }
 
-    public double ExecuteLockon(Fighter user)
+    public List<double> ExecuteLockon(Fighter user)
     {
       user.SetMp(user.GetMp() - 2);
 
       Random rnd = new Random();
       int randomNumber = rnd.Next(1,100);
-      // Console.WriteLine(user.GetAccuracy() + (user.GetAccuracy() * 0.4));
+
+      List<double> output = new List<double>();
 
       if(randomNumber <= user.GetLuck())
       {
-        double output = user.GetAccuracy() * 0.4;
+        double output1 = user.GetAccuracy() * 0.4;
+        output.Add(output1);
         user.SetAccuracy(user.GetAccuracy() + (user.GetAccuracy() * 0.4));
+
+        double output2 = user.GetLuck() * 0.4;
+        output.Add(output2);
+        user.SetLuck(user.GetLuck() + (user.GetLuck() * 0.4));
         return output;
       }
       else
       {
-        double output = user.GetAccuracy() * 0.2;
+        double output1 = user.GetAccuracy() * 0.2;
+        output.Add(output1);
         user.SetAccuracy(user.GetAccuracy() + (user.GetAccuracy() * 0.2));
+
+        double output2 = user.GetLuck() * 0.2;
+        output.Add(output2);
+        user.SetLuck(user.GetLuck() + (user.GetLuck() * 0.2));
         return output;
       }
     }
