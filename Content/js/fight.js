@@ -13,38 +13,78 @@ $(document).ready (function(){
       var player2 = $("#player2").val();
       var posting = $.post( "/GetFighters", { player1:player1, player2:player2 } );
       posting.done(function( data ) {
-        console.log(data);
         var player1 = $( data ).find( "#player1" );
         var player2 = $( data ).find( "#player2" );
+        console.log(data);
         $("#player1Name").html(player1.attr("name").toUpperCase());
         $("#player2Name").html(player2.attr("name").toUpperCase());
         $("#player1Image").attr("src",player1.attr("image"));
         $("#player2Image").attr("src",player2.attr("image"));
+        player1 = new Fighter(parseInt(player1.attr("healthpoints")),parseInt(player1.attr("magicpoints")),parseInt(player1.attr("attack")),parseInt(player1.attr("speed")),parseInt(player1.attr("accuracy")),parseInt(player1.attr("luck")),1);
+        player2 = new Fighter(parseInt(player2.attr("healthpoints")),parseInt(player2.attr("magicpoints")),parseInt(player2.attr("attack")),parseInt(player2.attr("speed")),parseInt(player2.attr("accuracy")),parseInt(player2.attr("luck")),2);
+        //draw player status
+        player1.draw();
+        player2.draw();
       });
     });
 });
 
-var Fighter = function(hp,mp,attack,speed,accuracy,luck,total,levelLimit){
-  this.hp = hp;
-  this.maxHp = hp;
+var player1 = null;
+var player2 = null;
+
+var Fighter = function(hp,mp,attack,speed,accuracy,luck,player){
+  this.hp = (40 * hp) + 140;
+  this.maxHp = this.hp;
   this.mp = mp;
   this.maxMp = mp;
-  this.attack = attack;
-  this.speed =speed;
-  this.accuracy =accuracy;
-  this.luck = luck;
-
+  this.attack = (25 + (2 * attack));
+  this.speed = (10 * speed);
+  this.accuracy =(10 * accuracy);
+  this.luck = (10 * luck);
   this.defense = 1;
   this.burn = 0;
+  this.player = player;
 }
 
-var Move(id, method, punchType) {
+Fighter.prototype.draw = function () {
+  if(this.player === 1){
+    $("#player1HpCurrent").html(this.hp);
+    $("#player1HpMax").html(this.maxHp);
+    $("#player1MpCurrent").html(this.mp);
+    $("#player1MpMax").html(this.maxMp);
+    $("#player1Attack").html(this.attack);
+    $("#player1Speed").html(this.speed);
+    $("#player1Accuracy").html(this.accuracy);
+    $("#player1Luck").html(this.luck);
+  } else {
+    $("#player2HpCurrent").html(this.hp);
+    $("#player2HpMax").html(this.maxHp);
+    $("#player2MpCurrent").html(this.mp);
+    $("#player2MpMax").html(this.maxMp);
+    $("#player2Attack").html(this.attack);
+    $("#player2Speed").html(this.speed);
+    $("#player2Accuracy").html(this.accuracy);
+    $("#player2Luck").html(this.luck);
+  }
+
+};
+
+var Battle = function(leftFighter,rightFighter){
+  this.leftFighter = leftFighter;
+  this.rightFighter = rightFighter;
+  this.moveDocket = [];
+  this.isFirst = null;
+  this.isSecond = null;
+
+}
+
+var Move = function(id, method, punchType) {
   this.id = id;
   this.method = method;
   this.punchType = punchType;
 }
 
-var Punch(multiplier, accuracy) {
+var Punch = function(multiplier, accuracy) {
   this.multiplier = multiplier;
   this.accuracy = accuracy;
 }
@@ -61,14 +101,6 @@ var blind = new Move(5, "executeBlind", "N/A");
 var lockon = new Move(6, "executeLockon", "N/A");
 var burn = new Move(7, "executeBurn", "N/A");
 
-var Battle = function(leftFighter,rightFighter){
-  this.leftFighter = leftFighter;
-  this.rightFighter = rightFighter;
-  this.moveDocket = [];
-  this.isFirst = null;
-  this.isSecond = null;
-
-}
 
 Battle.prototype.AddMoves = function (LeftMove, RightMove) {
   randomNumber =Math.floor((Math.random() * 100) + 1);
@@ -103,7 +135,7 @@ Battle.prototype.ExecuteMove = function (User, Opponent) {
     executePunch(User, Opponent, move.punchType);
   } else if (move.method === "executeBlock"){
     executeBlock(User);
-  } else if {move.method === "executeBlind"){
+  } else if (move.method === "executeBlind"){
     executeBlind(User, Opponent);
   } else if (move.method === "executeLockon"){
     executeLockon(User);
@@ -128,6 +160,9 @@ var executePunch = function(User, Target, Punch) {
       damage = User.attack * Punch.multiplier;
     }
     target.hp -= damage * target.defense;
+    if(target.hp < 0) {
+      target.hp = 0;
+    }
     return damage * target.defense;
 
   } else {
@@ -195,7 +230,7 @@ var executeLockon = function(User) {
   }
 }
 
-var executePyro = function(User, Target) {
+var executeBurn = function(User, Target) {
   User.mp -= 5;
 
   randomNumber =Math.floor((Math.random() * 100) + 1);
@@ -206,12 +241,12 @@ var executePyro = function(User, Target) {
     if(randomNumber <= User.luck) {
       output = Target.attack * 0.3;
       Target.attack = Target.attack * 0.7;
-      Target.burn += 60;
+      Target.burn += 30;
       return output;
     } else {
       output = Target.attack * 0.6;
       Target.attack = Target.attack * 0.4;
-      Target.burn += 60;
+      Target.burn += 15;
       return output;
     }
   } else {
@@ -245,9 +280,9 @@ var executeFrost = function(User, Target) {
       Target.speed = Target.speed * 0.8;
       output.push(output2);
       return output;
-    } else {
-      return "miss";
     }
+  } else {
+    return "miss";
   }
 }
 

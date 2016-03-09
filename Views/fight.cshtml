@@ -40,10 +40,8 @@
         <button id="submitFightButton" type="submit">FIGHT!</button>
       </div>
     </div>
-
-
     <!--Fight UI -->
-
+    <!-- start player 1 -->
     <div id="fightUI" class="row">
       <div class="col-xs-1"></div>
       <div class="col-xs-3">
@@ -52,10 +50,10 @@
         <div class="fighterStats">
           <div class="row">
             <div class="col-xs-5">
-              <span>HP: <span><span id="hpOutput">100</span><span> / <span id="hpOutput">100</span>
+              <span>HP: <span><span id="player1HpCurrent"></span><span> / <span id="player1HpMax"></span>
             </div>
             <div class="col-xs-5">
-              <span>MP: <span><span id="mpOutput">100</span><span> / <span id="hpOutput">100</span>
+              <span>MP: <span><span id="player1MpCurrent"></span><span> / <span id="player1MpMax"></span>
             </div>
           </div>
           <div class="lowerStats">
@@ -64,13 +62,13 @@
                 <img src="../Content/UI/attack.png">
               </div>
               <div class="col-xs-2">
-                <span id="attackOutput">100</span>
+                <span id="player1Attack"></span>
               </div>
               <div class="col-xs-2">
                 <img src="../Content/UI/speed.png">
               </div>
               <div class="col-xs-2">
-                <span id="speedOutput">100</span>
+                <span id="player1Speed"></span>
               </div>
             </div>
             <div class="row">
@@ -78,13 +76,13 @@
                 <img src="../Content/UI/accuracy.png">
               </div>
               <div class="col-xs-2">
-                <span id="accuracyOutput">100</span>
+                <span id="player1Accuracy"></span>
               </div>
               <div class="col-xs-2">
                 <img src="../Content/UI/luck.png">
               </div>
               <div class="col-xs-2">
-                <span id="luckOutput">100</span>
+                <span id="player1Luck"></span>
               </div>
             </div>
           </div>
@@ -117,16 +115,17 @@
         <h1 id="vsHeader">VS</h1>
         <div id="gameLog"></div>
       </div>
+      <!-- start player 2 -->
       <div class="col-xs-3">
         <h1 id="player2Name"></h1>
         <div id="fighterLeft" class="fighterHeadshot"><img src="" id="player2Image"></div>
         <div class="fighterStats">
           <div class="row">
             <div class="col-xs-5">
-              <span>HP: <span><span id="hpOutput">100</span><span> / <span id="hpOutput">100</span>
+              <span>HP: <span><span id="player2HpCurrent"></span><span> / <span id="player2HpMax"></span>
             </div>
             <div class="col-xs-5">
-              <span>MP: <span><span id="mpOutput">100</span><span> / <span id="hpOutput">100</span>
+              <span>MP: <span><span id="player2MpCurrent"></span><span> / <span id="player2MpMax"></span>
             </div>
           </div>
           <div class="lowerStats">
@@ -135,13 +134,13 @@
                 <img src="../Content/UI/attack.png">
               </div>
               <div class="col-xs-2">
-                <span id="attackOutput">100</span>
+                <span id="player2Attack"></span>
               </div>
               <div class="col-xs-2">
                 <img src="../Content/UI/speed.png">
               </div>
               <div class="col-xs-2">
-                <span id="speedOutput">100</span>
+                <span id="player2Speed"></span>
               </div>
             </div>
             <div class="row">
@@ -149,13 +148,13 @@
                 <img src="../Content/UI/accuracy.png">
               </div>
               <div class="col-xs-2">
-                <span id="accuracyOutput">100</span>
+                <span id="player2Accuracy"></span>
               </div>
               <div class="col-xs-2">
                 <img src="../Content/UI/luck.png">
               </div>
               <div class="col-xs-2">
-                <span id="luckOutput">100</span>
+                <span id="player2Luck"></span>
               </div>
             </div>
           </div>

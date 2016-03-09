@@ -28,7 +28,7 @@ namespace Fighters
     {
       _id = Id;
       _name = Name;
-      _hp = 120 + (Hp * 20);
+      _hp = Hp;
       _maxhp = Hp;
       _mp = Mp;
       _maxmp = Mp;
