@@ -136,7 +136,7 @@ namespace Fighters
       Random rnd = new Random();
       int randomNumber = rnd.Next(1, 100);
 
-      if(randomNumber <= (punch.GetAccuracy() + user.GetAccuracy() - target.GetSpeed()))
+      if(randomNumber <= (punch.GetAccuracy() + user.GetAccuracy() - (target.GetSpeed() *0.5) ))
       {
         double damage = 0;
 
@@ -181,7 +181,7 @@ namespace Fighters
       Random rnd = new Random();
       int randomNumber = rnd.Next(1,100);
 
-      if(randomNumber <= (80 + user.GetAccuracy() - target.GetSpeed()))
+      if(randomNumber <= (80 + user.GetAccuracy() - (target.GetSpeed() * 0.5 )))
       {
         if(randomNumber <= user.GetLuck())
         {
@@ -242,7 +242,7 @@ namespace Fighters
       Random rnd = new Random();
       int randomNumber = rnd.Next(1,100);
 
-      if(randomNumber <= (80 + user.GetAccuracy() - target.GetSpeed()))
+      if(randomNumber <= (80 + user.GetAccuracy() - (target.GetSpeed() * 0.5)))
       {
         if(randomNumber <= user.GetLuck())
         {
@@ -272,7 +272,7 @@ namespace Fighters
       Random rnd = new Random();
       int randomNumber = rnd.Next(1,100);
 
-      if(randomNumber <= (90 + user.GetAccuracy() - target.GetSpeed()))
+      if(randomNumber <= (90 + user.GetAccuracy() - (target.GetSpeed() * 0.5)))
       {
         if(randomNumber <= user.GetLuck())
         {
