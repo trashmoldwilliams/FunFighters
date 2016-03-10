@@ -1,78 +1,33 @@
 $(document).ready (function(){
   newFighterChecker();
-  $("#player1").change(function(){
-    newFighterChecker();
-  });
-  $("#player2").change(function(){
-    newFighterChecker();
-  });
-  $("#submitFightButton").click(function(){
-    $("#chooseFighterMenu").hide();
-    $("#fightUI").fadeIn();
-    var player1 = $("#player1").val();
-    var player2 = $("#player2").val();
-    var posting = $.post( "/GetFighters", { player1:player1, player2:player2 } );
-    posting.done(function( data ) {
-      var player1 = $( data ).find( "#player1" );
-      var player2 = $( data ).find( "#player2" );
-      console.log(data);
-      $("#player1Name").html(player1.attr("name").toUpperCase());
-      $("#player2Name").html(player2.attr("name").toUpperCase());
-      $("#player1Image").attr("src",player1.attr("image"));
-      $("#player2Image").attr("src",player2.attr("image"));
-      player1 = new Fighter(player1.attr("name"),parseInt(player1.attr("fighterId")), parseInt(player1.attr("healthpoints")),parseInt(player1.attr("magicpoints")),parseInt(player1.attr("attack")),parseInt(player1.attr("speed")),parseInt(player1.attr("accuracy")),parseInt(player1.attr("luck")),1, player1.attr("wins"), player1.attr("losses"));
-      player2 = new Fighter(player2.attr("name"),parseInt(player2.attr("fighterId")), parseInt(player2.attr("healthpoints")),parseInt(player2.attr("magicpoints")),parseInt(player2.attr("attack")),parseInt(player2.attr("speed")),parseInt(player2.attr("accuracy")),parseInt(player2.attr("luck")),2, player2.attr("wins"), player2.attr("losses"));
-      //draw player status
-      player1.draw();
-      player2.draw();
-      battle = new Battle (player1, player2);
-      $("#jab").click(function(){
-        battle.AddMoves(jab, battle.AI());
-        battle.ExecuteMove(battle.isFirst, battle.isSecond);
-        battle.ExecuteMove(battle.isSecond, battle.isFirst);
-        battle.revertBlock();
-        battle.burnFighters();
+    $("#player1").change(function(){
+      newFighterChecker();
+    });
+    $("#player2").change(function(){
+      newFighterChecker();
+    });
+    $("#submitFightButton").click(function(){
+      $("#chooseFighterMenu").hide();
+      $("#fightUI").fadeIn();
+      var player1 = $("#player1").val();
+      var player2 = $("#player2").val();
+      var posting = $.post( "/GetFighters", { player1:player1, player2:player2 } );
+      posting.done(function( data ) {
+        var player1 = $( data ).find( "#player1" );
+        var player2 = $( data ).find( "#player2" );
+        console.log(data);
+        $("#player1Name").html(player1.attr("name").toUpperCase());
+        $("#player2Name").html(player2.attr("name").toUpperCase());
+        $("#player1Image").attr("src",player1.attr("image"));
+        $("#player2Image").attr("src",player2.attr("image"));
+        player1 = new Fighter(player1.attr("name"),parseInt(player1.attr("fighterId")), parseInt(player1.attr("healthpoints")),parseInt(player1.attr("magicpoints")),parseInt(player1.attr("attack")),parseInt(player1.attr("speed")),parseInt(player1.attr("accuracy")),parseInt(player1.attr("luck")),1, player1.attr("wins"), player1.attr("losses"));
+        player2 = new Fighter(player2.attr("name"),parseInt(player2.attr("fighterId")), parseInt(player2.attr("healthpoints")),parseInt(player2.attr("magicpoints")),parseInt(player2.attr("attack")),parseInt(player2.attr("speed")),parseInt(player2.attr("accuracy")),parseInt(player2.attr("luck")),2, player2.attr("wins"), player2.attr("losses"));
+        //draw player status
         player1.draw();
         player2.draw();
-        battle.checkDead();
-      });
-
-      $("#hook").click(function(){
-        battle.AddMoves(hook, battle.AI());
-        battle.ExecuteMove(battle.isFirst, battle.isSecond);
-        battle.ExecuteMove(battle.isSecond, battle.isFirst);
-        battle.revertBlock();
-        battle.burnFighters();
-        player1.draw();
-        player2.draw()
-        battle.checkDead();
-      });
-
-      $("#uppercut").click(function(){
-        battle.AddMoves(uppercut, battle.AI());
-        battle.ExecuteMove(battle.isFirst, battle.isSecond);
-        battle.ExecuteMove(battle.isSecond, battle.isFirst);
-        battle.revertBlock();
-        battle.burnFighters();
-        player1.draw();
-        player2.draw()
-        battle.checkDead();
-      });
-
-      $("#block").click(function(){
-        battle.AddMoves(block, battle.AI());
-        battle.ExecuteMove(battle.isFirst, battle.isSecond);
-        battle.ExecuteMove(battle.isSecond, battle.isFirst);
-        battle.revertBlock();
-        battle.burnFighters();
-        player1.draw();
-        player2.draw()
-        battle.checkDead();
-      });
-
-      $("#blind").click(function(){
-        if(player1.mp >= 1) {
-          battle.AddMoves(blind, battle.AI());
+        battle = new Battle (player1, player2);
+        $("#jab").click(function(){
+          battle.AddMoves(jab, battle.AI());
           battle.ExecuteMove(battle.isFirst, battle.isSecond);
           battle.ExecuteMove(battle.isSecond, battle.isFirst);
           battle.revertBlock();
@@ -80,53 +35,98 @@ $(document).ready (function(){
           player1.draw();
           player2.draw();
           battle.checkDead();
-        }
-      });
+        });
 
-      $("#lockon").click(function(){
-        if(player1.mp >= 2) {
-          battle.AddMoves(lockon, battle.AI());
+        $("#hook").click(function(){
+          battle.AddMoves(hook, battle.AI());
           battle.ExecuteMove(battle.isFirst, battle.isSecond);
           battle.ExecuteMove(battle.isSecond, battle.isFirst);
           battle.revertBlock();
           battle.burnFighters();
           player1.draw();
-          player2.draw();
+          player2.draw()
           battle.checkDead();
-        }
-      });
+        });
 
-      if(player1.maxMp < 7) {
-        $("#burn").hide();
-      }
-
-      $("#burn").click(function(){
-        if(player1.mp >= 5) {
-          battle.AddMoves(burn, battle.AI());
+        $("#uppercut").click(function(){
+          battle.AddMoves(uppercut, battle.AI());
           battle.ExecuteMove(battle.isFirst, battle.isSecond);
           battle.ExecuteMove(battle.isSecond, battle.isFirst);
           battle.revertBlock();
           battle.burnFighters();
           player1.draw();
-          player2.draw();
+          player2.draw()
           battle.checkDead();
-        }
-      });
+        });
 
-      $("#frost").click(function(){
-        if(player1.mp >= 3) {
-          battle.AddMoves(frost, battle.AI());
+        $("#block").click(function(){
+          battle.AddMoves(block, battle.AI());
           battle.ExecuteMove(battle.isFirst, battle.isSecond);
           battle.ExecuteMove(battle.isSecond, battle.isFirst);
           battle.revertBlock();
           battle.burnFighters();
           player1.draw();
-          player2.draw();
+          player2.draw()
           battle.checkDead();
+        });
+
+        $("#blind").click(function(){
+          if(player1.mp >= 1) {
+            battle.AddMoves(blind, battle.AI());
+            battle.ExecuteMove(battle.isFirst, battle.isSecond);
+            battle.ExecuteMove(battle.isSecond, battle.isFirst);
+            battle.revertBlock();
+            battle.burnFighters();
+            player1.draw();
+            player2.draw();
+            battle.checkDead();
+          }
+        });
+
+        $("#lockon").click(function(){
+          if(player1.mp >= 2) {
+            battle.AddMoves(lockon, battle.AI());
+            battle.ExecuteMove(battle.isFirst, battle.isSecond);
+            battle.ExecuteMove(battle.isSecond, battle.isFirst);
+            battle.revertBlock();
+            battle.burnFighters();
+            player1.draw();
+            player2.draw();
+            battle.checkDead();
+          }
+        });
+
+        if(player1.maxMp < 10) {
+          $("#burn").hide();
         }
+
+        $("#burn").click(function(){
+          if((player1.mp >= 6) && (player1.maxMp = 10)) {
+            battle.AddMoves(burn, battle.AI());
+            battle.ExecuteMove(battle.isFirst, battle.isSecond);
+            battle.ExecuteMove(battle.isSecond, battle.isFirst);
+            battle.revertBlock();
+            battle.burnFighters();
+            player1.draw();
+            player2.draw();
+            battle.checkDead();
+          }
+        });
+
+        $("#frost").click(function(){
+          if(player1.mp >= 3) {
+            battle.AddMoves(frost, battle.AI());
+            battle.ExecuteMove(battle.isFirst, battle.isSecond);
+            battle.ExecuteMove(battle.isSecond, battle.isFirst);
+            battle.revertBlock();
+            battle.burnFighters();
+            player1.draw();
+            player2.draw();
+            battle.checkDead();
+          }
+        });
       });
     });
-  });
 });
 
 var player1 = null;
@@ -136,14 +136,14 @@ var battle = null;
 var Fighter = function(name,id,hp,mp,attack,speed,accuracy,luck,player,wins,losses){
   this.name = name.toUpperCase();
   this.id = id;
-  this.hp = (40 * hp) + 100;
+  this.hp = (25 * hp) + 100;
   this.maxHp = this.hp;
   this.mp = mp;
   this.maxMp = mp;
   this.attack = (23 + (2 * attack));
   this.speed = (10 * speed);
   this.accuracy =(10 * accuracy);
-  this.luck = ((10 * luck) * 0.6);
+  this.luck = ((10 * luck) * 0.9);
   this.defense = 1;
   this.burn = 0;
   this.player = player;
@@ -197,7 +197,7 @@ var Punch = function(name, multiplier, accuracy) {
 
 var jabPunch = new Punch("JAB", 0.5, 100);
 var hookPunch = new Punch("HOOK", 1, 50);
-var uppercutPunch = new Punch("UPPERCUT", 1.5, 30);
+var uppercutPunch = new Punch("UPPERCUT", 1.5, 20);
 
 var jab = new Move(1, "executePunch", jabPunch);
 var hook = new Move(2, "executePunch", hookPunch);
@@ -374,15 +374,15 @@ var executeLockon = function(User) {
 }
 
 var executeBurn = function(User, Target) {
-  User.mp -= 5;
+  User.mp -= 6;
 
   randomNumber =Math.floor((Math.random() * 100) + 1);
 
   if(randomNumber <= (80 + User.accuracy - (Target.speed * 0.6) )) {
     var output = 0;
 
-      output = Math.floor(Target.attack * 0.6);
-      Target.attack = Math.floor(Target.attack * 0.4);
+      output = Math.floor(Target.attack * 0.2);
+      Target.attack = Math.floor(Target.attack * 0.8);
       Target.burn += 25;
       return output;
     }
@@ -450,7 +450,7 @@ Battle.prototype.AI = function() {
   //   console.log(hook);
   //   return hook;
   // }
-  if((AI.mp >= 5) && (AI.maxMp >= 7) && ((((AI.accuracy - (player.speed *0.5) ) + 80)>50)))
+  if((AI.mp >= 6) && (AI.maxMp === 10) && ((((AI.accuracy - (player.speed *0.5) ) + 80)>50)))
   {
     console.log(burn);
     return burn;
@@ -465,7 +465,7 @@ Battle.prototype.AI = function() {
     console.log(lockon);
     return lockon;
   }
-  else if ((((AI.accuracy -(player.speed *0.5) ) <= 35) &&(AI.mp < 2)))
+  else if ((((player.maxHp * 0.25 >= player.hp) && (AI.accuracy -(player.speed *0.5) ) <= 25) &&(AI.mp < 2)))
   {
     console.log(jab);
     return jab;
@@ -475,7 +475,7 @@ Battle.prototype.AI = function() {
     console.log(blind);
     return blind;
   }
-  else if ((AI.hp >= (player.hp * 2)) && ((AI.accuracy - (player.speed *0.5) ) > 50))
+  else if ((AI.hp >= (player.hp * 2)) && ((AI.accuracy - (player.speed *0.5) ) > 40))
   {
     console.log(hook);
     return hook;
