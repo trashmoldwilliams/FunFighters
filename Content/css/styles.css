@@ -142,23 +142,35 @@ select {
   line-height: 50px;
 }
 
+.moveSelector:hover {
+  cursor: pointer;
+}
+
+.critical {
+  color: red;
+}
+
+.fighterHeader {
+  white-space : nowrap;
+}
+
 #fightUI {
   display: none;
 }
 
 #gameLog {
   margin-left: 100px;
-  margin-top: 350px;
+  margin-top: 325px;
   border-style: double;
   border-color: grey;
   border-width: 5px;
   width: 700px;
-  height: 300px;
+  height: 500px;
 }
 
 #vsHeader {
   font-size: 100px;
-  margin-left: 35px;
+  margin-left: 60px;
   margin-top: 150px;
 }
 

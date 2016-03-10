@@ -130,16 +130,16 @@ var player2 = null;
 var battle = null;
 
 var Fighter = function(name,id,hp,mp,attack,speed,accuracy,luck,player,wins,losses){
-  this.name = name;
+  this.name = name.toUpperCase();
   this.id = id;
-  this.hp = (40 * hp) + 140;
+  this.hp = (40 * hp) + 100;
   this.maxHp = this.hp;
   this.mp = mp;
   this.maxMp = mp;
-  this.attack = (25 + (2 * attack));
+  this.attack = (23 + (2 * attack));
   this.speed = (10 * speed);
   this.accuracy =(10 * accuracy);
-  this.luck = (10 * luck);
+  this.luck = ((10 * luck) * 0.6);
   this.defense = 1;
   this.burn = 0;
   this.player = player;
@@ -185,14 +185,15 @@ var Move = function(id, method, punchType) {
   this.punchType = punchType;
 }
 
-var Punch = function(multiplier, accuracy) {
+var Punch = function(name, multiplier, accuracy) {
+  this.name = name;
   this.multiplier = multiplier;
   this.accuracy = accuracy;
 }
 
-var jabPunch = new Punch(0.5, 100);
-var hookPunch = new Punch(1, 65);
-var uppercutPunch = new Punch(2, 30);
+var jabPunch = new Punch("JAB", 0.5, 100);
+var hookPunch = new Punch("HOOK", 1, 50);
+var uppercutPunch = new Punch("UPPERCUT", 2, 30);
 
 var jab = new Move(1, "executePunch", jabPunch);
 var hook = new Move(2, "executePunch", hookPunch);
@@ -205,6 +206,7 @@ var frost = new Move(8, "executeFrost", "N/A");
 
 
 Battle.prototype.AddMoves = function (LeftMove, RightMove) {
+  $("#gameLogList").html("");
   randomNumber =Math.floor((Math.random() * 100) + 1);
 
   if(this.leftFighter.speed >= this.rightFighter.speed) {
@@ -234,17 +236,48 @@ Battle.prototype.ExecuteMove = function (User, Opponent) {
   var move = this.moveDocket[0];
 
   if(move.method === "executePunch") {
-    executePunch(User, Opponent, move.punchType);
-  } else if (move.method === "executeBlock"){
-    executeBlock(User);
+    $("#gameLogList").append("<li>" + User.name + " used " + move.punchType.name + ",</li>");
+    var output = executePunch(User, Opponent, move.punchType);
+    if(output === 0) {
+      $("#gameLogList").append("<li>" + User.name + " missed!</li>");
+    } else {
+      $("#gameLogList").append("<li>" + Opponent.name + " took " + output + " damage!</li>");
+    }
   } else if (move.method === "executeBlind"){
-    executeBlind(User, Opponent);
+    $("#gameLogList").append("<li>" + User.name + " used BLIND,</li>");
+    var output = executeBlind(User, Opponent);
+    if(output === 0) {
+      $("#gameLogList").append("<li>" + User.name + " missed!</li>");
+    } else {
+      $("#gameLogList").append("<li>" + Opponent.name + " lost " + output + " accuracy!</li>");
+    }
   } else if (move.method === "executeLockon"){
-    executeLockon(User);
-  } else if (move.method === "executeBurn"){
-    executeBurn(User, Opponent);
+    $("#gameLogList").append("<li>" + User.name + " used LOCKON,</li>");
+    var output = executeLockon(User);
+    $("#gameLogList").append("<li>" + Opponent.name + " gained " + output[0] + " accuracy!</li>");
+    $("#gameLogList").append("<li>" + Opponent.name + " gained " + output[1] + " luck!</li>");
+  }
+  else if (move.method === "executeBurn"){
+    $("#gameLogList").append("<li>" + User.name + " used BURN,</li>");
+    var output = executeBurn(User, Opponent);
+    if(output === 0) {
+      $("#gameLogList").append("<li>" + User.name + " missed!</li>");
+    } else {
+      $("#gameLogList").append("<li>" + Opponent.name + " caught on FIRE!!</li>");
+      $("#gameLogList").append("<li>" + Opponent.name + " lost " + output + " attack!</li>");
+    }
+  } else if (move.method === "executeFrost"){
+    $("#gameLogList").append("<li>" + User.name + " used FROST,</li>");
+    var output = executeFrost(User, Opponent);
+    if(output === 0) {
+      $("#gameLogList").append("<li>" + User.name + " missed!</li>");
+    } else {
+      $("#gameLogList").append("<li>" + Opponent.name + " took " + output[0] + " damage!</li>");
+      $("#gameLogList").append("<li>" + Opponent.name + " lost " + output[1] + " speed!</li>");
+    }
   } else {
-    executeFrost(User, Opponent);
+    $("#gameLogList").append("<li>" + User.name + " used BLOCK!</li>");
+    executeBlock(User);
   }
 
   this.moveDocket.splice(0, 1);
@@ -253,10 +286,11 @@ Battle.prototype.ExecuteMove = function (User, Opponent) {
 var executePunch = function(User, Target, Punch) {
   randomNumber =Math.floor((Math.random() * 100) + 1);
 
-  if(randomNumber <= (Punch.accuracy + User.accuracy - Target.speed)) {
+  if(randomNumber <= (Punch.accuracy + User.accuracy - (Target.speed *0.5))) {
     var damage = 0;
 
     if(randomNumber <= User.luck) {
+      $("#gameLogList").append('<li class="critical">CRITICAL!</li>');
       damage = Math.floor(2 * (User.attack * Punch.multiplier));
     } else {
       damage = Math.floor(User.attack * Punch.multiplier);
@@ -268,7 +302,7 @@ var executePunch = function(User, Target, Punch) {
     return Math.floor(damage * Target.defense);
 
   } else {
-    return "miss";
+    return 0;
   }
 }
 
@@ -276,7 +310,8 @@ var executeBlock = function(User) {
   randomNumber =Math.floor((Math.random() * 100) + 1);
 
   if(randomNumber <= User.luck) {
-    User.defense = 0.1;
+    $("#gameLogList").append('<li class="critical">CRITICAL!</li>');
+    User.defense = 0.35;
   } else {
     User.defense = 0.65;
   }
@@ -287,10 +322,11 @@ var executeBlind = function(User, Target) {
 
   randomNumber =Math.floor((Math.random() * 100) + 1);
 
-  if(randomNumber <= (80 + User.accuracy - Target.speed)) {
+  if(randomNumber <= (80 + User.accuracy - (Target.speed * 0.5) )) {
     var output = 0;
 
     if(randomNumber <= User.luck) {
+      $("#gameLogList").append('<li class="critical">CRITICAL!</li>');
       output = Math.floor(Target.accuracy * 0.2);
       Target.accuracy = Math.floor(Target.accuracy * 0.8);
       return output;
@@ -300,7 +336,7 @@ var executeBlind = function(User, Target) {
       return output;
     }
   } else {
-    return "miss";
+    return 0;
   }
 }
 
@@ -313,6 +349,7 @@ var executeLockon = function(User) {
   var output2 = 0;
 
   if(randomNumber <= User.luck) {
+    $("#gameLogList").append('<li class="critical">CRITICAL!</li>');
     output1 = Math.floor(User.accuracy * 0.4);
     User.accuracy = Math.floor(User.accuracy * 1.4);
     output.push(output1);
@@ -337,22 +374,16 @@ var executeBurn = function(User, Target) {
 
   randomNumber =Math.floor((Math.random() * 100) + 1);
 
-  if(randomNumber <= (80 + User.accuracy - Target.speed)) {
+  if(randomNumber <= (80 + User.accuracy - (Target.speed * 0.5) )) {
     var output = 0;
 
-    if(randomNumber <= User.luck) {
-      output = Math.floor(Target.attack * 0.3);
-      Target.attack = Math.floor(Target.attack * 0.7);
-      Target.burn += 30;
-      return output;
-    } else {
       output = Math.floor(Target.attack * 0.6);
       Target.attack = Math.floor(Target.attack * 0.4);
-      Target.burn += 15;
+      Target.burn += 25;
       return output;
     }
-  } else {
-    return "miss";
+    else {
+    return 0;
   }
 }
 
@@ -364,10 +395,11 @@ var executeFrost = function(User, Target) {
   var output1 = 0;
   var output2 = 0;
 
-  if(randomNumber <= (80 + User.accuracy - Target.speed)) {
+  if(randomNumber <= (80 + User.accuracy - (Target.speed *0.5))) {
     if(randomNumber <= User.luck) {
-      output1 = Math.floor(Target.hp * 0.2);
-      Target.hp = Math.floor(Target.hp * 0.8);
+      $("#gameLogList").append('<li class="critical">CRITICAL!</li>');
+      output1 = Math.floor(Target.hp * 0.3);
+      Target.hp = Math.floor(Target.hp * 0.7);
       output.push(output1);
       output2 = Math.floor(Target.speed * 0.4);
       Target.speed = Math.floor(Target.speed * 0.6);
@@ -375,8 +407,8 @@ var executeFrost = function(User, Target) {
       return output;
 
     } else {
-      output1 = Math.floor(Target.hp * 0.1);
-      Target.hp = Math.floor(Target.hp * 0.9);
+      output1 = Math.floor(Target.hp * 0.2);
+      Target.hp = Math.floor(Target.hp * 0.8);
       output.push(output1);
       output2 = Math.floor(Target.speed * 0.2);
       Target.speed = Math.floor(Target.speed * 0.8);
@@ -384,7 +416,7 @@ var executeFrost = function(User, Target) {
       return output;
     }
   } else {
-    return "miss";
+    return 0;
   }
 }
 
@@ -392,25 +424,100 @@ Battle.prototype.AI = function() {
   player = this.leftFighter;
   AI = this.rightFighter;
 
-  if(player.burn == 0 && AI.mp >= 6) {
+  // if(player.burn == 0 && AI.mp >= 6) {
+  //   console.log(burn);
+  //   return burn;
+  // } else if ((AI.accuracy - (player.speed *0.5) ) < -20 && AI.mp >= 2) {
+  //   console.log(lockon);
+  //   return lockon;
+  // } else if (player.hp <= (AI.attack * 0.5) && AI.burn == 0) {
+  //   console.log(jab);
+  //   return jab;
+  // } else if (player.burn > 0 && AI.hp >= (AI.hp * 0.15) && AI.speed > (player.speed *0.5) ) {
+  //   console.log(block);
+  //   return block;
+  // } else if (AI.speed > player.accuracy && AI.speed > player.speed && player.accuracy - AI.speed > -50) {
+  //   console.log(blind);
+  //   return blind;
+  // } else if (AI.accuracy - player.speed > 25) {
+  //   console.log(uppercut);
+  //   return uppercut;
+  // } else {
+  //   console.log(hook);
+  //   return hook;
+  // }
+  if((AI.mp >= 5) && ((((AI.accuracy - (player.speed *0.5) ) + 80)>50)))
+  {
     console.log(burn);
     return burn;
-  } else if ((AI.accuracy - player.speed) < -20 && AI.mp >= 2) {
+  }
+  else if (((AI.accuracy - (player.speed *0.5) ) < 30) && (AI.mp >= 2))
+  {
     console.log(lockon);
     return lockon;
-  } else if (player.hp <= (AI.attack * 0.5) && AI.burn == 0) {
+  }
+  else if (((player.speed)  > 50) && (AI.mp >= 3))
+  {
+    console.log(frost);
+    return frost;
+  }
+  else if ((((AI.accuracy -(player.speed *0.5) ) <= 35) &&(AI.mp < 2)))
+  {
     console.log(jab);
     return jab;
-  } else if (player.burn > 0 && AI.hp >= (AI.hp * 0.15) && AI.speed > player.speed) {
-    console.log(block);
-    return block;
-  } else if (AI.speed > player.accuracy && AI.speed > player.speed && player.accuracy - AI.speed > -50) {
+  }
+  else if ((AI.mp >= 1) && (player.accuracy >= 60) && (AI.luck < 50))
+  {
     console.log(blind);
     return blind;
-  } else if (AI.accuracy - player.speed > 25) {
+  }
+  else if ((AI.hp >= (player.hp * 2)) && ((AI.accuracy - (player.speed *0.5) ) > 50))
+  {
+    console.log(hook);
+    return hook;
+  }
+  else if (((AI.hp <=(AI.maxHp * 0.6) && (player.burn != 0))))
+  {
+    console.log(block);
+    return block;
+  }
+  else if (((AI.accuracy - (player.speed *0.5) ) + 30) >=100)
+  {
     console.log(uppercut);
     return uppercut;
-  } else {
+  }
+  else if ((AI.luck >= 50) && (AI.mp >= 5) && ((((AI.accuracy - (player.speed *0.5) ) + 80)>30)))
+  {
+    console.log(burn);
+    return burn;
+  }
+  else if (((AI.accuracy - (player.speed * 0.5) ) + 30) >=100)
+  {
+    console.log(uppercut);
+    return uppercut;
+  }
+  else if ((AI.hp >= (player.hp * 2)) && ((AI.accuracy - (player.speed *0.5) ) < 50))
+  {
+    console.log(jab);
+    return jab;
+  }
+  else if ((AI.hp < player.attack) && (((player.accuracy - AI.speed +100) > 30)))
+  {
+    console.log(uppercut);
+    return uppercut;
+  }
+  else if (((AI.hp * 0.5) < AI.maxHp) && (player.hp > AI.hp) && ((AI.accuracy - (player.speed *0.5)  + 65) > 40))
+  {
+    console.log(hook);
+    return hook;
+  }
+  else if ((AI.hp <= (AI.maxHp * 0.25) && AI.luck >= 40 && (player.hp >= (player.maxHp * 0.5))))
+  {
+    console.log(uppercut);
+    return uppercut;
+  }
+  else
+  {
     console.log(hook);
     return hook;
   }
@@ -418,6 +525,7 @@ Battle.prototype.AI = function() {
 
 Battle.prototype.checkDead = function () {
   if(this.leftFighter.hp <= 0) {
+    $("#moveSelector").removeAttr('id');
     $("#winner").html(this.rightFighter.name);
     var posting = $.post( "/UpdateFighters", { player2:this.rightFighter.id, player2Wins:this.rightFighter.wins+1, player2Losses:this.rightFighter.losses, player1:this.leftFighter.id, player1Wins:this.leftFighter.wins, player1Losses:this.leftFighter.losses+1 } );
     posting.done(function( data ) {
@@ -425,6 +533,7 @@ Battle.prototype.checkDead = function () {
       $("#endFightMenu").fadeIn();
     });
   } else if (this.rightFighter.hp <= 0) {
+    $("#moveSelector").removeAttr('id');
     $("#winner").html(this.leftFighter.name);
     var posting = $.post( "/UpdateFighters", { player2:this.rightFighter.id, player2Wins:this.rightFighter.wins, player2Losses:this.rightFighter.losses+1, player1:this.leftFighter.id, player1Wins:this.leftFighter.wins+1, player1Losses:this.leftFighter.losses } );
     posting.done(function( data ) {
@@ -437,6 +546,7 @@ Battle.prototype.checkDead = function () {
 
 Battle.prototype.burnFighters = function () {
   if(this.leftFighter.burn > 0) {
+    $("#gameLogList").append("<li>" + this.leftFighter.name + " took " + this.leftFighter.burn + " damage from burning!</li>");
     this.leftFighter.hp -= this.leftFighter.burn;
     if(this.leftFighter.hp < 0) {
       this.leftFighter.hp = 0;
@@ -444,6 +554,7 @@ Battle.prototype.burnFighters = function () {
   }
 
   if(this.rightFighter.burn > 0) {
+    $("#gameLogList").append("<li>" + this.rightFighter.name + " took " + this.rightFighter.burn + " damage from burning!</li>");
     this.rightFighter.hp -= this.rightFighter.burn;
     if(this.rightFighter.hp < 0) {
       this.rightFighter.hp = 0;
