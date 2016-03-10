@@ -6,11 +6,13 @@
     <title>"Fun" Fighters</title>
   </head>
   <h1>"FUN" FIGHTERS</h1><br>
-  <a class="btn btn-primary" href="/add_fighter">ADD FIGHTER</a>
-  <form action="/fight">
-      <input class="btn btn-danger" type="submit" value="FIGHT!">
-  </form><br>
-  <form action="/leaderboard">
-      <input class="btn btn-warning" type="submit" value="LEADERBOARD">
-  </form>
+  <a href="/add_fighter" class="btn btn-primary">ADD FIGHTER</a><br>
+  <a href="/fight" class="btn btn-danger">FIGHT!</a><br>
+    @{
+    foreach(var fighter in Model){
+      <div class="">
+        <h1 value="@fighter.GetId()">@fighter.GetName()</h1>
+      </div>
+    }
+  }
 </html>
