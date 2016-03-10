@@ -97,7 +97,7 @@ $(document).ready (function(){
         });
 
         $("#burn").click(function(){
-          if(player1.mp >= 5) {
+          if((player1.mp >= 5) && (player1.maxMp >= 7)) {
             battle.AddMoves(burn, battle.AI());
             battle.ExecuteMove(battle.isFirst, battle.isSecond);
             battle.ExecuteMove(battle.isSecond, battle.isFirst);
@@ -193,7 +193,7 @@ var Punch = function(name, multiplier, accuracy) {
 
 var jabPunch = new Punch("JAB", 0.5, 100);
 var hookPunch = new Punch("HOOK", 1, 50);
-var uppercutPunch = new Punch("UPPERCUT", 2, 30);
+var uppercutPunch = new Punch("UPPERCUT", 1.5, 30);
 
 var jab = new Move(1, "executePunch", jabPunch);
 var hook = new Move(2, "executePunch", hookPunch);
@@ -254,8 +254,8 @@ Battle.prototype.ExecuteMove = function (User, Opponent) {
   } else if (move.method === "executeLockon"){
     $("#gameLogList").append("<li>" + User.name + " used LOCKON,</li>");
     var output = executeLockon(User);
-    $("#gameLogList").append("<li>" + Opponent.name + " gained " + output[0] + " accuracy!</li>");
-    $("#gameLogList").append("<li>" + Opponent.name + " gained " + output[1] + " luck!</li>");
+    $("#gameLogList").append("<li>" + User.name + " gained " + output[0] + " accuracy!</li>");
+    $("#gameLogList").append("<li>" + User.name + " gained " + output[1] + " luck!</li>");
   }
   else if (move.method === "executeBurn"){
     $("#gameLogList").append("<li>" + User.name + " used BURN,</li>");
@@ -286,7 +286,7 @@ Battle.prototype.ExecuteMove = function (User, Opponent) {
 var executePunch = function(User, Target, Punch) {
   randomNumber =Math.floor((Math.random() * 100) + 1);
 
-  if(randomNumber <= (Punch.accuracy + User.accuracy - (Target.speed *0.5))) {
+  if(randomNumber <= (Punch.accuracy + User.accuracy - (Target.speed *0.6))) {
     var damage = 0;
 
     if(randomNumber <= User.luck) {
@@ -322,7 +322,7 @@ var executeBlind = function(User, Target) {
 
   randomNumber =Math.floor((Math.random() * 100) + 1);
 
-  if(randomNumber <= (80 + User.accuracy - (Target.speed * 0.5) )) {
+  if(randomNumber <= (80 + User.accuracy - (Target.speed * 0.6) )) {
     var output = 0;
 
     if(randomNumber <= User.luck) {
@@ -374,7 +374,7 @@ var executeBurn = function(User, Target) {
 
   randomNumber =Math.floor((Math.random() * 100) + 1);
 
-  if(randomNumber <= (80 + User.accuracy - (Target.speed * 0.5) )) {
+  if(randomNumber <= (80 + User.accuracy - (Target.speed * 0.6) )) {
     var output = 0;
 
       output = Math.floor(Target.attack * 0.6);
@@ -395,7 +395,7 @@ var executeFrost = function(User, Target) {
   var output1 = 0;
   var output2 = 0;
 
-  if(randomNumber <= (80 + User.accuracy - (Target.speed *0.5))) {
+  if(randomNumber <= (80 + User.accuracy - (Target.speed *0.6))) {
     if(randomNumber <= User.luck) {
       $("#gameLogList").append('<li class="critical">CRITICAL!</li>');
       output1 = Math.floor(Target.hp * 0.3);
@@ -446,27 +446,27 @@ Battle.prototype.AI = function() {
   //   console.log(hook);
   //   return hook;
   // }
-  if((AI.mp >= 5) && ((((AI.accuracy - (player.speed *0.5) ) + 80)>50)))
+  if((AI.mp >= 5) && (AI.maxMp >= 7) && ((((AI.accuracy - (player.speed *0.5) ) + 80)>50)))
   {
     console.log(burn);
     return burn;
   }
-  else if (((AI.accuracy - (player.speed *0.5) ) < 30) && (AI.mp >= 2))
-  {
-    console.log(lockon);
-    return lockon;
-  }
-  else if (((player.speed)  > 50) && (AI.mp >= 3))
+  else if ((((player.speed)  > 50) || (player.maxHp > 350)) && (AI.mp >= 3))
   {
     console.log(frost);
     return frost;
+  }
+  else if (((AI.accuracy - (player.speed *0.5) ) < 50) && (AI.mp >= 2) && (AI.maxMp < 7))
+  {
+    console.log(lockon);
+    return lockon;
   }
   else if ((((AI.accuracy -(player.speed *0.5) ) <= 35) &&(AI.mp < 2)))
   {
     console.log(jab);
     return jab;
   }
-  else if ((AI.mp >= 1) && (player.accuracy >= 60) && (AI.luck < 50))
+  else if ((AI.mp >= 1) && (player.accuracy >= 70) && (AI.luck < 50))
   {
     console.log(blind);
     return blind;
@@ -476,7 +476,7 @@ Battle.prototype.AI = function() {
     console.log(hook);
     return hook;
   }
-  else if (((AI.hp <=(AI.maxHp * 0.6) && (player.burn != 0))))
+  else if (((AI.hp <=(AI.maxHp * 0.7) && (player.burn != 0))))
   {
     console.log(block);
     return block;
