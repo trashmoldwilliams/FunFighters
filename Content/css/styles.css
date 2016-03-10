@@ -209,10 +209,6 @@ select {
   color: black;
 }
 
-#moveSelector:disabled {
-  background-color: grey;
-}
-
 #submitFightButton:disabled {
   padding: 20px;
   border-radius: 10px;
