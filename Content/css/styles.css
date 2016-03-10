@@ -146,13 +146,10 @@ select {
   color: red;
 }
 
-<<<<<<< HEAD
-=======
 .fighterHeader {
   white-space : nowrap;
 }
 
->>>>>>> d072a73ce3c5ef06e361ae2f08033783a24de6e3
 #fightUI {
   display: none;
 }
