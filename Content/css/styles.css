@@ -142,6 +142,10 @@ select {
   line-height: 50px;
 }
 
+.critical {
+  color: red;
+}
+
 #fightUI {
   display: none;
 }

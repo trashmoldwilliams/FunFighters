@@ -322,7 +322,7 @@ namespace Fighters
         foundAccuracy = rdr.GetInt32(9);
         foundLuck = rdr.GetInt32(10);
       }
-      Fighter foundFighter = new Fighter(foundFighterName, foundImageId, foundHp, foundMp, foundAttack, foundSpeed, foundAccuracy, foundAccuracy, foundWins, foundLosses, foundFighterId);
+      Fighter foundFighter = new Fighter(foundFighterName, foundImageId, foundHp, foundMp, foundAttack, foundSpeed, foundAccuracy, foundLuck, foundWins, foundLosses, foundFighterId);
 
       if (rdr != null)
       {
