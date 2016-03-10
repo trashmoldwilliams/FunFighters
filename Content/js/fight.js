@@ -527,7 +527,7 @@ Battle.prototype.checkDead = function () {
   if(this.leftFighter.hp <= 0) {
     $("#moveSelector").removeAttr('id');
     $("#winner").html(this.rightFighter.name);
-    var posting = $.post( "/UpdateFighters", { player2:this.rightFighter.id, player2Wins:this.rightFighter.wins+1, player2Losses:this.rightFighter.losses, player1:this.leftFighter.id, player1Wins:this.leftFighter.wins, player1Losses:this.leftFighter.losses+1 } );
+    var posting = $.post( "/UpdateFighters", { player2:this.rightFighter.id, player2Wins:parseInt(this.rightFighter.wins)+1, player2Losses:parseInt(this.rightFighter.losses), player1:this.leftFighter.id, player1Wins:parseInt(this.leftFighter.wins), player1Losses:parseInt(this.leftFighter.losses)+1 } );
     posting.done(function( data ) {
       $("#fightUI").hide();
       $("#endFightMenu").fadeIn();
@@ -535,7 +535,7 @@ Battle.prototype.checkDead = function () {
   } else if (this.rightFighter.hp <= 0) {
     $("#moveSelector").removeAttr('id');
     $("#winner").html(this.leftFighter.name);
-    var posting = $.post( "/UpdateFighters", { player2:this.rightFighter.id, player2Wins:this.rightFighter.wins, player2Losses:this.rightFighter.losses+1, player1:this.leftFighter.id, player1Wins:this.leftFighter.wins+1, player1Losses:this.leftFighter.losses } );
+    var posting = $.post( "/UpdateFighters", { player2:this.rightFighter.id, player2Wins:this.rightFighter.wins, player2Losses:parseInt(this.rightFighter.losses+1), player1:this.leftFighter.id, player1Wins:parseInt(this.leftFighter.wins)+1, player1Losses:parseInt(this.leftFighter.losses) } );
     posting.done(function( data ) {
       console.log(data);
       $("#fightUI").hide();

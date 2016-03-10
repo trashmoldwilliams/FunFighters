@@ -25,9 +25,9 @@ namespace Fighters
       };
       Post["/UpdateFighters"] =_ => {
         Fighter leftFighter = Fighter.Find(Request.Form["player1"]);
-        leftFighter.UpdateRecord(Request.Form["player1Wins"],Request.Form["player1Losses"]);
+        leftFighter.UpdateRecord(Int32.Parse(Request.Form["player1Wins"]),Int32.Parse(Request.Form["player1Losses"]));
         Fighter rightFighter = Fighter.Find(Request.Form["player2"]);
-        rightFighter.UpdateRecord(Request.Form["player2Wins"],Request.Form["player2Losses"]);
+        rightFighter.UpdateRecord(Int32.Parse(Request.Form["player2Wins"]),Int32.Parse(Request.Form["player2Losses"]));
         Dictionary<int,Fighter> returnDictionary = new Dictionary<int,Fighter>{};
         returnDictionary.Add(1,leftFighter);
         returnDictionary.Add(2,rightFighter);

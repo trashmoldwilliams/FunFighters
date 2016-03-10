@@ -228,7 +228,7 @@ select {
   margin: auto;
   background-color: gray;
   border: white solid 1px;
-  width: 400px;
+  width: 800px;
   height: 60px;
 }
 
@@ -243,8 +243,11 @@ select {
   display: inline;
 }
 
-
 .leaderStats {
   display: inline;
   font-size: 16px;
+}
+
+.cursorHover:hover {
+  cursor: pointer;
 }
