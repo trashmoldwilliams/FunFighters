@@ -71,7 +71,7 @@ namespace Fighters
       Assert.Equal("burn", currentBattle.AIMove());
     }
     [Fact]
-    public void Test_Fight()
+    public void Test_Fight_SecondFight()
     {
 
       Fighter firstFighter = new Fighter("Midas",1,400,1,1,49,10,10,10);

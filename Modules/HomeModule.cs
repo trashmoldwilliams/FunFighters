@@ -20,7 +20,6 @@ namespace Fighters
         Fighter newFighter = new Fighter(Request.Form["name"], Request.Form["imageSelection"], Request.Form["input_hp"], Request.Form["input_mp"], Request.Form["input_attack"], Request.Form["input_speed"], Request.Form["input_accuracy"], Request.Form["input_luck"]);
         newFighter.Save();
         return View ["index.cshtml"];
-        newFighter.Save();
       };
       Post["/UpdateFighters"] =_ => {
         Fighter leftFighter = Fighter.Find(Request.Form["player1"]);
@@ -77,4 +76,3 @@ namespace Fighters
     }
   }
 }
->>>>>>> 2d9a6f58c2b82a4297d4786c99e2dd3001625a92

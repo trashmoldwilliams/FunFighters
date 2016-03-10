@@ -338,7 +338,7 @@ namespace Fighters
     public void UpdateRecord(int wins, int losses)
     {
       SqlConnection conn = DB.Connection();
-      SqlDataReader rdr;
+      SqlDataReader rdr =  null;
       conn.Open();
 
       SqlCommand cmd = new SqlCommand("UPDATE fighters SET wins = @wins, losses = @losses WHERE id = @fighters;", conn);
