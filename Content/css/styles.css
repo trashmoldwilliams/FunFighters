@@ -142,6 +142,10 @@ select {
   line-height: 50px;
 }
 
+.critical {
+  color: red;
+}
+
 #fightUI {
   display: none;
 }
@@ -153,12 +157,12 @@ select {
   border-color: grey;
   border-width: 5px;
   width: 700px;
-  height: 300px;
+  height: 400px;
 }
 
 #vsHeader {
   font-size: 100px;
-  margin-left: 35px;
+  margin-left: 60px;
   margin-top: 150px;
 }
 
