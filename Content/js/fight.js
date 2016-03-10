@@ -139,7 +139,7 @@ var Fighter = function(name,id,hp,mp,attack,speed,accuracy,luck,player,wins,loss
   this.attack = (23 + (2 * attack));
   this.speed = (10 * speed);
   this.accuracy =(10 * accuracy);
-  this.luck = (10 * luck);
+  this.luck = ((10 * luck) * 0.6);
   this.defense = 1;
   this.burn = 0;
   this.player = player;
@@ -192,7 +192,7 @@ var Punch = function(name, multiplier, accuracy) {
 }
 
 var jabPunch = new Punch("JAB", 0.5, 100);
-var hookPunch = new Punch("HOOK", 1, 65);
+var hookPunch = new Punch("HOOK", 1, 50);
 var uppercutPunch = new Punch("UPPERCUT", 2, 30);
 
 var jab = new Move(1, "executePunch", jabPunch);
@@ -311,7 +311,7 @@ var executeBlock = function(User) {
 
   if(randomNumber <= User.luck) {
     $("#gameLogList").append('<li class="critical">CRITICAL!</li>');
-    User.defense = 0.1;
+    User.defense = 0.35;
   } else {
     User.defense = 0.65;
   }
@@ -377,19 +377,12 @@ var executeBurn = function(User, Target) {
   if(randomNumber <= (80 + User.accuracy - (Target.speed * 0.5) )) {
     var output = 0;
 
-    if(randomNumber <= User.luck) {
-      $("#gameLogList").append('<li class="critical">CRITICAL!</li>');
-      output = Math.floor(Target.attack * 0.3);
-      Target.attack = Math.floor(Target.attack * 0.7);
-      Target.burn += 30;
-      return output;
-    } else {
       output = Math.floor(Target.attack * 0.6);
       Target.attack = Math.floor(Target.attack * 0.4);
-      Target.burn += 15;
+      Target.burn += 25;
       return output;
     }
-  } else {
+    else {
     return 0;
   }
 }
@@ -405,8 +398,8 @@ var executeFrost = function(User, Target) {
   if(randomNumber <= (80 + User.accuracy - (Target.speed *0.5))) {
     if(randomNumber <= User.luck) {
       $("#gameLogList").append('<li class="critical">CRITICAL!</li>');
-      output1 = Math.floor(Target.hp * 0.2);
-      Target.hp = Math.floor(Target.hp * 0.8);
+      output1 = Math.floor(Target.hp * 0.3);
+      Target.hp = Math.floor(Target.hp * 0.7);
       output.push(output1);
       output2 = Math.floor(Target.speed * 0.4);
       Target.speed = Math.floor(Target.speed * 0.6);
@@ -414,8 +407,8 @@ var executeFrost = function(User, Target) {
       return output;
 
     } else {
-      output1 = Math.floor(Target.hp * 0.1);
-      Target.hp = Math.floor(Target.hp * 0.9);
+      output1 = Math.floor(Target.hp * 0.2);
+      Target.hp = Math.floor(Target.hp * 0.8);
       output.push(output1);
       output2 = Math.floor(Target.speed * 0.2);
       Target.speed = Math.floor(Target.speed * 0.8);
@@ -468,25 +461,25 @@ Battle.prototype.AI = function() {
     console.log(frost);
     return frost;
   }
-  else if ((((AI.accuracy -(player.speed *0.5) ) + 100) <= 10) &&(AI.mp < 2))
+  else if ((((AI.accuracy -(player.speed *0.5) ) <= 35) &&(AI.mp < 2)))
   {
     console.log(jab);
     return jab;
+  }
+  else if ((AI.mp >= 1) && (player.accuracy >= 60) && (AI.luck < 50))
+  {
+    console.log(blind);
+    return blind;
   }
   else if ((AI.hp >= (player.hp * 2)) && ((AI.accuracy - (player.speed *0.5) ) > 50))
   {
     console.log(hook);
     return hook;
   }
-  else if ((player.hp <= player.GetBurn) && (AI.speed < (player.speed *0.5) ))
+  else if (((AI.hp <=(AI.maxHp * 0.6) && (player.burn != 0))))
   {
     console.log(block);
     return block;
-  }
-  else if ((AI.mp >= 1) && ((player.accuracy - AI.speed) >60) )
-  {
-    console.log(blind);
-    return blind;
   }
   else if (((AI.accuracy - (player.speed *0.5) ) + 30) >=100)
   {
