@@ -484,7 +484,7 @@ Battle.prototype.burnFighters = function () {
   }
 
   if(this.rightFighter.burn > 0) {
-    $("#gameLogList").append("<li>" + this.rightFighter.name + " took " + this.leftFighter.burn + " damage from burning!</li>");
+    $("#gameLogList").append("<li>" + this.rightFighter.name + " took " + this.rightFighter.burn + " damage from burning!</li>");
     this.rightFighter.hp -= this.rightFighter.burn;
     if(this.rightFighter.hp < 0) {
       this.rightFighter.hp = 0;
