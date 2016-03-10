@@ -190,6 +190,10 @@ select {
   background-color: violet;
 }
 
+#frost {
+  background-color: white;
+}
+
 #submitFightButton {
   padding: 20px;
   border-radius: 10px;

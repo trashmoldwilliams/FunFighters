@@ -30,6 +30,8 @@ $(document).ready (function(){
           battle.AddMoves(jab, battle.AI());
           battle.ExecuteMove(battle.isFirst, battle.isSecond);
           battle.ExecuteMove(battle.isSecond, battle.isFirst);
+          battle.revertBlock();
+          battle.burnFighters();
           player1.draw();
           player2.draw();
           battle.checkDead();
@@ -39,8 +41,10 @@ $(document).ready (function(){
           battle.AddMoves(hook, battle.AI());
           battle.ExecuteMove(battle.isFirst, battle.isSecond);
           battle.ExecuteMove(battle.isSecond, battle.isFirst);
+          battle.revertBlock();
+          battle.burnFighters();
           player1.draw();
-          player2.draw();
+          player2.draw()
           battle.checkDead();
         });
 
@@ -48,8 +52,10 @@ $(document).ready (function(){
           battle.AddMoves(uppercut, battle.AI());
           battle.ExecuteMove(battle.isFirst, battle.isSecond);
           battle.ExecuteMove(battle.isSecond, battle.isFirst);
+          battle.revertBlock();
+          battle.burnFighters();
           player1.draw();
-          player2.draw();
+          player2.draw()
           battle.checkDead();
         });
 
@@ -57,8 +63,10 @@ $(document).ready (function(){
           battle.AddMoves(block, battle.AI());
           battle.ExecuteMove(battle.isFirst, battle.isSecond);
           battle.ExecuteMove(battle.isSecond, battle.isFirst);
+          battle.revertBlock();
+          battle.burnFighters();
           player1.draw();
-          player2.draw();
+          player2.draw()
           battle.checkDead();
         });
 
@@ -67,6 +75,8 @@ $(document).ready (function(){
             battle.AddMoves(blind, battle.AI());
             battle.ExecuteMove(battle.isFirst, battle.isSecond);
             battle.ExecuteMove(battle.isSecond, battle.isFirst);
+            battle.revertBlock();
+            battle.burnFighters();
             player1.draw();
             player2.draw();
             battle.checkDead();
@@ -78,6 +88,8 @@ $(document).ready (function(){
             battle.AddMoves(lockon, battle.AI());
             battle.ExecuteMove(battle.isFirst, battle.isSecond);
             battle.ExecuteMove(battle.isSecond, battle.isFirst);
+            battle.revertBlock();
+            battle.burnFighters();
             player1.draw();
             player2.draw();
             battle.checkDead();
@@ -89,6 +101,8 @@ $(document).ready (function(){
             battle.AddMoves(burn, battle.AI());
             battle.ExecuteMove(battle.isFirst, battle.isSecond);
             battle.ExecuteMove(battle.isSecond, battle.isFirst);
+            battle.revertBlock();
+            battle.burnFighters();
             player1.draw();
             player2.draw();
             battle.checkDead();
@@ -100,6 +114,8 @@ $(document).ready (function(){
             battle.AddMoves(frost, battle.AI());
             battle.ExecuteMove(battle.isFirst, battle.isSecond);
             battle.ExecuteMove(battle.isSecond, battle.isFirst);
+            battle.revertBlock();
+            battle.burnFighters();
             player1.draw();
             player2.draw();
             battle.checkDead();
@@ -298,19 +314,19 @@ var executeLockon = function(User) {
 
   if(randomNumber <= User.luck) {
     output1 = Math.floor(User.accuracy * 0.4);
-    User.accuracy = Math.floor(User.accuracy * 0.4);
+    User.accuracy = Math.floor(User.accuracy * 1.4);
     output.push(output1);
     output2 = Math.floor(User.luck * 0.4);
-    User.luck = Math.floor(User.luck * 0.4);
+    User.luck = Math.floor(User.luck * 1.4);
     output.push(output2);
     return output;
 
   } else {
     output1 = Math.floor(User.accuracy * 0.2);
-    User.accuracy = Math.floor(User.accuracy * 0.2);
+    User.accuracy = Math.floor(User.accuracy * 1.2);
     output.push(output1);
     output2 = Math.floor(User.luck * 0.2);
-    User.luck = Math.floor(User.luck * 0.2);
+    User.luck = Math.floor(User.luck * 1.2);
     output.push(output2);
     return output;
   }
@@ -416,8 +432,28 @@ Battle.prototype.checkDead = function () {
       $("#fightUI").hide();
       $("#endFightMenu").fadeIn();
     });
-
   }
+};
+
+Battle.prototype.burnFighters = function () {
+  if(this.leftFighter.burn > 0) {
+    this.leftFighter.hp -= this.leftFighter.burn;
+    if(this.leftFighter.hp < 0) {
+      this.leftFighter.hp = 0;
+    }
+  }
+
+  if(this.rightFighter.burn > 0) {
+    this.rightFighter.hp -= this.rightFighter.burn;
+    if(this.rightFighter.hp < 0) {
+      this.rightFighter.hp = 0;
+    }
+  }
+};
+
+Battle.prototype.revertBlock = function () {
+  this.leftFighter.defense = 1;
+  this.rightFighter.defense = 1;
 };
 
 var newFighterChecker = function(){
