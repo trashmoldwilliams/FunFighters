@@ -96,12 +96,12 @@ $(document).ready (function(){
           }
         });
 
-        if(player1.maxMp < 7) {
+        if(player1.maxMp < 10) {
           $("#burn").hide();
         }
 
         $("#burn").click(function(){
-          if((player1.mp >= 5) && (player1.maxMp >= 7)) {
+          if((player1.mp >= 6) && (player1.maxMp = 10)) {
             battle.AddMoves(burn, battle.AI());
             battle.ExecuteMove(battle.isFirst, battle.isSecond);
             battle.ExecuteMove(battle.isSecond, battle.isFirst);
@@ -136,14 +136,14 @@ var battle = null;
 var Fighter = function(name,id,hp,mp,attack,speed,accuracy,luck,player,wins,losses){
   this.name = name.toUpperCase();
   this.id = id;
-  this.hp = (40 * hp) + 100;
+  this.hp = (25 * hp) + 100;
   this.maxHp = this.hp;
   this.mp = mp;
   this.maxMp = mp;
   this.attack = (23 + (2 * attack));
   this.speed = (10 * speed);
   this.accuracy =(10 * accuracy);
-  this.luck = ((10 * luck) * 0.6);
+  this.luck = ((10 * luck) * 0.9);
   this.defense = 1;
   this.burn = 0;
   this.player = player;
@@ -197,7 +197,7 @@ var Punch = function(name, multiplier, accuracy) {
 
 var jabPunch = new Punch("JAB", 0.5, 100);
 var hookPunch = new Punch("HOOK", 1, 50);
-var uppercutPunch = new Punch("UPPERCUT", 1.5, 30);
+var uppercutPunch = new Punch("UPPERCUT", 1.5, 20);
 
 var jab = new Move(1, "executePunch", jabPunch);
 var hook = new Move(2, "executePunch", hookPunch);
@@ -374,15 +374,15 @@ var executeLockon = function(User) {
 }
 
 var executeBurn = function(User, Target) {
-  User.mp -= 5;
+  User.mp -= 6;
 
   randomNumber =Math.floor((Math.random() * 100) + 1);
 
   if(randomNumber <= (80 + User.accuracy - (Target.speed * 0.6) )) {
     var output = 0;
 
-      output = Math.floor(Target.attack * 0.6);
-      Target.attack = Math.floor(Target.attack * 0.4);
+      output = Math.floor(Target.attack * 0.2);
+      Target.attack = Math.floor(Target.attack * 0.8);
       Target.burn += 25;
       return output;
     }
@@ -450,7 +450,7 @@ Battle.prototype.AI = function() {
   //   console.log(hook);
   //   return hook;
   // }
-  if((AI.mp >= 5) && (AI.maxMp >= 7) && ((((AI.accuracy - (player.speed *0.5) ) + 80)>50)))
+  if((AI.mp >= 6) && (AI.maxMp === 10) && ((((AI.accuracy - (player.speed *0.5) ) + 80)>50)))
   {
     console.log(burn);
     return burn;
@@ -465,7 +465,7 @@ Battle.prototype.AI = function() {
     console.log(lockon);
     return lockon;
   }
-  else if ((((AI.accuracy -(player.speed *0.5) ) <= 35) &&(AI.mp < 2)))
+  else if ((((player.maxHp * 0.25 >= player.hp) && (AI.accuracy -(player.speed *0.5) ) <= 25) &&(AI.mp < 2)))
   {
     console.log(jab);
     return jab;
@@ -475,7 +475,7 @@ Battle.prototype.AI = function() {
     console.log(blind);
     return blind;
   }
-  else if ((AI.hp >= (player.hp * 2)) && ((AI.accuracy - (player.speed *0.5) ) > 50))
+  else if ((AI.hp >= (player.hp * 2)) && ((AI.accuracy - (player.speed *0.5) ) > 40))
   {
     console.log(hook);
     return hook;
