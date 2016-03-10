@@ -132,11 +132,11 @@ var battle = null;
 var Fighter = function(name,id,hp,mp,attack,speed,accuracy,luck,player,wins,losses){
   this.name = name;
   this.id = id;
-  this.hp = (40 * hp) + 140;
+  this.hp = (40 * hp) + 100;
   this.maxHp = this.hp;
   this.mp = mp;
   this.maxMp = mp;
-  this.attack = (25 + (2 * attack));
+  this.attack = (23 + (2 * attack));
   this.speed = (10 * speed);
   this.accuracy =(10 * accuracy);
   this.luck = (10 * luck);
@@ -243,7 +243,8 @@ Battle.prototype.ExecuteMove = function (User, Opponent) {
     executeLockon(User);
   } else if (move.method === "executeBurn"){
     executeBurn(User, Opponent);
-  } else {
+  }
+  else {
     executeFrost(User, Opponent);
   }
 
@@ -253,7 +254,7 @@ Battle.prototype.ExecuteMove = function (User, Opponent) {
 var executePunch = function(User, Target, Punch) {
   randomNumber =Math.floor((Math.random() * 100) + 1);
 
-  if(randomNumber <= (Punch.accuracy + User.accuracy - Target.speed)) {
+  if(randomNumber <= (Punch.accuracy + User.accuracy - (Target.speed *0.5))) {
     var damage = 0;
 
     if(randomNumber <= User.luck) {
@@ -287,7 +288,7 @@ var executeBlind = function(User, Target) {
 
   randomNumber =Math.floor((Math.random() * 100) + 1);
 
-  if(randomNumber <= (80 + User.accuracy - Target.speed)) {
+  if(randomNumber <= (80 + User.accuracy - (Target.speed * 0.5) )) {
     var output = 0;
 
     if(randomNumber <= User.luck) {
@@ -337,7 +338,7 @@ var executeBurn = function(User, Target) {
 
   randomNumber =Math.floor((Math.random() * 100) + 1);
 
-  if(randomNumber <= (80 + User.accuracy - Target.speed)) {
+  if(randomNumber <= (80 + User.accuracy - (Target.speed * 0.5) )) {
     var output = 0;
 
     if(randomNumber <= User.luck) {
@@ -364,7 +365,7 @@ var executeFrost = function(User, Target) {
   var output1 = 0;
   var output2 = 0;
 
-  if(randomNumber <= (80 + User.accuracy - Target.speed)) {
+  if(randomNumber <= (80 + User.accuracy - (Target.speed *0.5))) {
     if(randomNumber <= User.luck) {
       output1 = Math.floor(Target.hp * 0.2);
       Target.hp = Math.floor(Target.hp * 0.8);
@@ -392,25 +393,100 @@ Battle.prototype.AI = function() {
   player = this.leftFighter;
   AI = this.rightFighter;
 
-  if(player.burn == 0 && AI.mp >= 6) {
+  // if(player.burn == 0 && AI.mp >= 6) {
+  //   console.log(burn);
+  //   return burn;
+  // } else if ((AI.accuracy - (player.speed *0.5) ) < -20 && AI.mp >= 2) {
+  //   console.log(lockon);
+  //   return lockon;
+  // } else if (player.hp <= (AI.attack * 0.5) && AI.burn == 0) {
+  //   console.log(jab);
+  //   return jab;
+  // } else if (player.burn > 0 && AI.hp >= (AI.hp * 0.15) && AI.speed > (player.speed *0.5) ) {
+  //   console.log(block);
+  //   return block;
+  // } else if (AI.speed > player.accuracy && AI.speed > player.speed && player.accuracy - AI.speed > -50) {
+  //   console.log(blind);
+  //   return blind;
+  // } else if (AI.accuracy - player.speed > 25) {
+  //   console.log(uppercut);
+  //   return uppercut;
+  // } else {
+  //   console.log(hook);
+  //   return hook;
+  // }
+  if((AI.mp >= 5) && ((((AI.accuracy - (player.speed *0.5) ) + 80)>50)))
+  {
     console.log(burn);
     return burn;
-  } else if ((AI.accuracy - player.speed) < -20 && AI.mp >= 2) {
+  }
+  else if (((AI.accuracy - (player.speed *0.5) ) < 30) && (AI.mp >= 2))
+  {
     console.log(lockon);
     return lockon;
-  } else if (player.hp <= (AI.attack * 0.5) && AI.burn == 0) {
+  }
+  else if (((player.speed)  > 50) && (AI.mp >= 3))
+  {
+    console.log(frost);
+    return frost;
+  }
+  else if ((((AI.accuracy -(player.speed *0.5) ) + 100) <= 10) &&(AI.mp < 2))
+  {
     console.log(jab);
     return jab;
-  } else if (player.burn > 0 && AI.hp >= (AI.hp * 0.15) && AI.speed > player.speed) {
+  }
+  else if ((AI.hp >= (player.hp * 2)) && ((AI.accuracy - (player.speed *0.5) ) > 50))
+  {
+    console.log(hook);
+    return hook;
+  }
+  else if ((player.hp <= player.GetBurn) && (AI.speed < (player.speed *0.5) ))
+  {
     console.log(block);
     return block;
-  } else if (AI.speed > player.accuracy && AI.speed > player.speed && player.accuracy - AI.speed > -50) {
+  }
+  else if ((AI.mp >= 1) && ((player.accuracy - AI.speed) >60) )
+  {
     console.log(blind);
     return blind;
-  } else if (AI.accuracy - player.speed > 25) {
+  }
+  else if (((AI.accuracy - (player.speed *0.5) ) + 30) >=100)
+  {
     console.log(uppercut);
     return uppercut;
-  } else {
+  }
+  else if ((AI.luck >= 50) && (AI.mp >= 5) && ((((AI.accuracy - (player.speed *0.5) ) + 80)>30)))
+  {
+    console.log(burn);
+    return burn;
+  }
+  else if (((AI.accuracy - (player.speed * 0.5) ) + 30) >=100)
+  {
+    console.log(uppercut);
+    return uppercut;
+  }
+  else if ((AI.hp >= (player.hp * 2)) && ((AI.accuracy - (player.speed *0.5) ) < 50))
+  {
+    console.log(jab);
+    return jab;
+  }
+  else if ((AI.hp < player.attack) && (((player.accuracy - AI.speed +100) > 30)))
+  {
+    console.log(uppercut);
+    return uppercut;
+  }
+  else if (((AI.hp * 0.5) < AI.maxHp) && (player.hp > AI.hp) && ((AI.accuracy - (player.speed *0.5)  + 65) > 40))
+  {
+    console.log(hook);
+    return hook;
+  }
+  else if ((AI.hp <= (AI.maxHp * 0.25) && AI.luck >= 40 && (player.hp >= (player.maxHp * 0.5))))
+  {
+    console.log(uppercut);
+    return uppercut;
+  }
+  else
+  {
     console.log(hook);
     return hook;
   }
