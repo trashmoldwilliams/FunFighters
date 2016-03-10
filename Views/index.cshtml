@@ -7,12 +7,16 @@
   </head>
   <h1>"FUN" FIGHTERS</h1><br>
   <a href="/add_fighter" class="btn btn-primary">ADD FIGHTER</a><br>
-  <a href="/fight" class="btn btn-danger">FIGHT!</a><br>
+  <a href="/fight" class="btn btn-danger">FIGHT!</a><br><br>
+  <div class="conatiner">
     @{
-    foreach(var fighter in Model){
-      <div class="">
-        <h1 value="@fighter.GetId()">@fighter.GetName()</h1>
-      </div>
+      foreach(var fighter in Model){
+        <div class="leaderboard">
+          <img src="@fighter.GetImageLocation()"/>
+          <h2 value="@fighter.GetId()">@fighter.GetName()</h2>
+          <div class="leaderStats">Wins: @fighter.GetWins() Losses: @fighter.GetLosses()</div>
+        </div>
+      }
     }
-  }
+  </div>
 </html>
