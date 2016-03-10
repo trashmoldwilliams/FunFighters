@@ -142,6 +142,10 @@ select {
   line-height: 50px;
 }
 
+#fightUI {
+  display: none;
+}
+
 #gameLog {
   margin-left: 100px;
   margin-top: 350px;
@@ -184,4 +188,26 @@ select {
 
 #burn {
   background-color: violet;
+}
+
+#frost {
+  background-color: white;
+}
+
+#submitFightButton {
+  padding: 20px;
+  border-radius: 10px;
+  background-color: white;
+  color: black;
+}
+
+#submitFightButton:disabled {
+  padding: 20px;
+  border-radius: 10px;
+  background-color: gray;
+  color: black;
+}
+
+#endFightMenu {
+  display: none;
 }

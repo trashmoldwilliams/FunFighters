@@ -22,14 +22,26 @@ namespace Fighters
         return View ["index.cshtml"];
         newFighter.Save();
       };
-      Get["/fighters.xml"] = _ => {
-        return View["get_fighters.cshtml",Fighter.GetAll()];
+      Post["/UpdateFighters"] =_ => {
+        Fighter leftFighter = Fighter.Find(Request.Form["player1"]);
+        leftFighter.UpdateRecord(Request.Form["player1Wins"],Request.Form["player1Losses"]);
+        Fighter rightFighter = Fighter.Find(Request.Form["player2"]);
+        rightFighter.UpdateRecord(Request.Form["player2Wins"],Request.Form["player2Losses"]);
+        Dictionary<int,Fighter> returnDictionary = new Dictionary<int,Fighter>{};
+        returnDictionary.Add(1,leftFighter);
+        returnDictionary.Add(2,rightFighter);
+        return View["get_fighters.cshtml",returnDictionary];
+      };
+      Post["/GetFighters"] = _ => {
+        Fighter player1 = Fighter.Find(Request.Form["player1"]);
+        Fighter player2 = Fighter.Find(Request.Form["player2"]);
+        Dictionary<int,Fighter> returnDictionary = new Dictionary<int,Fighter>{};
+        returnDictionary.Add(1,player1);
+        returnDictionary.Add(2,player2);
+        return View["get_fighters.cshtml",returnDictionary];
       };
       Get["/fight"] = _ => {
-        return View["fight.cshtml"];
-      };
-      Post["/fight"] = _ => {
-        return View["fight.cshtml"];
+        return View["fight.cshtml",Fighter.GetAll()];
       };
       Get["/image"] = _ => {
         return View["image.cshtml",Image.GetAll()];

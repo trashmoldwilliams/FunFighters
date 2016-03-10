@@ -244,6 +244,37 @@ namespace Fighters
       }
     }
 
+    public string GetImageLocation()
+    {
+      SqlConnection conn = DB.Connection();
+      SqlDataReader rdr = null;
+      conn.Open();
+
+      SqlCommand cmd = new SqlCommand("SELECT image_path FROM fighter_images WHERE id = @ImageId;", conn);
+      SqlParameter ImageIdParameter = new SqlParameter();
+      ImageIdParameter.ParameterName = "@ImageId";
+      ImageIdParameter.Value = this._imageId;
+      cmd.Parameters.Add(ImageIdParameter);
+      rdr = cmd.ExecuteReader();
+
+      string foundImageLocation = null;
+
+      while(rdr.Read())
+      {
+        foundImageLocation = rdr.GetString(0);
+      }
+
+      if (rdr != null)
+      {
+        rdr.Close();
+      }
+      if (conn != null)
+      {
+        conn.Close();
+      }
+      return foundImageLocation;
+    }
+
     public static void DeleteAll()
     {
       SqlConnection conn = DB.Connection();
@@ -304,34 +335,32 @@ namespace Fighters
       return foundFighter;
     }
 
-    public void UpdateRecord(string outcome)
+    public void UpdateRecord(int wins, int losses)
     {
       SqlConnection conn = DB.Connection();
       SqlDataReader rdr;
       conn.Open();
 
-      SqlCommand cmd = new SqlCommand("UPDATE fighters SET @model = @model + 1 WHERE id = @fighters;", conn);
+      SqlCommand cmd = new SqlCommand("UPDATE fighters SET wins = @wins, losses = @losses WHERE id = @fighters;", conn);
 
-      SqlParameter outcomeParameter= new SqlParameter();
-      outcomeParameter.ParameterName = "@model";
-      outcomeParameter.Value = outcome;
-      cmd.Parameters.Add(outcomeParameter);
+      SqlParameter winsParameter= new SqlParameter();
+      winsParameter.ParameterName = "@wins";
+      winsParameter.Value = wins;
+      cmd.Parameters.Add(winsParameter);
+
+      SqlParameter lossesParameter= new SqlParameter();
+      lossesParameter.ParameterName = "@losses";
+      lossesParameter.Value = losses;
+      cmd.Parameters.Add(lossesParameter);
 
       SqlParameter fighterIdParameter = new SqlParameter();
       fighterIdParameter.ParameterName = "@fighters";
       fighterIdParameter.Value = this.GetId();
       cmd.Parameters.Add(fighterIdParameter);
-      rdr = cmd.ExecuteReader();
+      cmd.ExecuteNonQuery();
 
-      while(rdr.Read())
-      {
-        this._name = rdr.GetString(0);
-      }
-
-      if (rdr != null)
-      {
-        rdr.Close();
-      }
+      this._wins = wins;
+      this._losses = losses;
 
       if (conn != null)
       {
