@@ -375,7 +375,7 @@ namespace Fighters
       SqlDataReader rdr = null;
       conn.Open();
 
-      SqlCommand cmd = new SqlCommand("SELECT * FROM fighters;", conn);
+      SqlCommand cmd = new SqlCommand("SELECT * FROM fighters order by wins-losses desc;", conn);
       rdr = cmd.ExecuteReader();
 
       while(rdr.Read())
