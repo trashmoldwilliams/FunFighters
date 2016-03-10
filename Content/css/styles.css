@@ -146,6 +146,10 @@ select {
   color: red;
 }
 
+.fighterHeader {
+  white-space : nowrap;
+}
+
 #fightUI {
   display: none;
 }
@@ -203,6 +207,10 @@ select {
   border-radius: 10px;
   background-color: white;
   color: black;
+}
+
+#moveSelector:disabled {
+  background-color: grey;
 }
 
 #submitFightButton:disabled {

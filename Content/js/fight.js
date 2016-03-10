@@ -457,6 +457,7 @@ Battle.prototype.AI = function() {
 
 Battle.prototype.checkDead = function () {
   if(this.leftFighter.hp <= 0) {
+    $("#moveSelector").prop("disabled", true);
     $("#winner").html(this.rightFighter.name);
     var posting = $.post( "/UpdateFighters", { player2:this.rightFighter.id, player2Wins:this.rightFighter.wins+1, player2Losses:this.rightFighter.losses, player1:this.leftFighter.id, player1Wins:this.leftFighter.wins, player1Losses:this.leftFighter.losses+1 } );
     posting.done(function( data ) {
@@ -464,6 +465,7 @@ Battle.prototype.checkDead = function () {
       $("#endFightMenu").fadeIn();
     });
   } else if (this.rightFighter.hp <= 0) {
+    $("#moveSelector").prop("disabled", true);
     $("#winner").html(this.leftFighter.name);
     var posting = $.post( "/UpdateFighters", { player2:this.rightFighter.id, player2Wins:this.rightFighter.wins, player2Losses:this.rightFighter.losses+1, player1:this.leftFighter.id, player1Wins:this.leftFighter.wins+1, player1Losses:this.leftFighter.losses } );
     posting.done(function( data ) {
