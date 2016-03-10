@@ -10,7 +10,8 @@ namespace Fighters
     public HomeModule()
     {
       Get["/"] = _ => {
-        return View["index.cshtml"];
+        List<Fighter> allFighters = Fighter.GetAll();
+        return View["index.cshtml", allFighters];
       };
       Get["/add_fighter"] = _ => {
         List<Image> allImages = Image.GetAll();
@@ -19,7 +20,8 @@ namespace Fighters
       Post["/confirm_fighter"] =_=> {
         Fighter newFighter = new Fighter(Request.Form["name"], Request.Form["imageSelection"], Request.Form["input_hp"], Request.Form["input_mp"], Request.Form["input_attack"], Request.Form["input_speed"], Request.Form["input_accuracy"], Request.Form["input_luck"]);
         newFighter.Save();
-        return View ["index.cshtml"];
+        List<Fighter> allFighters = Fighter.GetAll();
+        return View ["index.cshtml",allFighters];
       };
       Post["/UpdateFighters"] =_ => {
         Fighter leftFighter = Fighter.Find(Request.Form["player1"]);
