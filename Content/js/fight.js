@@ -96,6 +96,10 @@ $(document).ready (function(){
           }
         });
 
+        if(player1.maxMp < 7) {
+          $("#burn").hide();
+        }
+
         $("#burn").click(function(){
           if(player1.mp >= 5) {
             battle.AddMoves(burn, battle.AI());

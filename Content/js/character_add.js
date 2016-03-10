@@ -14,6 +14,8 @@ TotalPoints.prototype.hpIncrease = function(){
   }
   $("#hp").html(this.hp);
   $("#input_hp").val(this.hp);
+  $("#hpOutput").html((40 * this.hp) + 100);
+  $("#maxHpOutput").html((40 * this.hp) + 100);
 }
 TotalPoints.prototype.hpDecrease = function(){
   this.hp--;
@@ -22,6 +24,8 @@ TotalPoints.prototype.hpDecrease = function(){
    }
   $("#hp").html(this.hp);
   $("#input_hp").val(this.hp);
+  $("#hpOutput").html((40 * this.hp) + 100);
+  $("#maxHpOutput").html((40 * this.hp) + 100);
 }
 TotalPoints.prototype.mpIncrease = function(){
   if (((this.hp+this.mp+this.attack+this.speed+this.accuracy+this.luck)<this.total) && (this.mp <=this.levelLimit)) {
@@ -29,6 +33,8 @@ TotalPoints.prototype.mpIncrease = function(){
   }
   $("#mp").html(this.mp);
   $("#input_mp").val(this.mp);
+  $("#mpOutput").html(this.mp);
+  $("#maxMpOutput").html(this.mp);
 }
 TotalPoints.prototype.mpDecrease = function(){
   this.mp--;
@@ -37,6 +43,8 @@ TotalPoints.prototype.mpDecrease = function(){
    }
   $("#mp").html(this.mp);
   $("#input_mp").val(this.mp);
+  $("#mpOutput").html(this.mp);
+  $("#maxMpOutput").html(this.mp);
 }
 TotalPoints.prototype.attackIncrease = function(){
   if (((this.hp+this.mp+this.attack+this.speed+this.accuracy+this.luck)<this.total) && (this.attack <=this.levelLimit)) {
@@ -44,6 +52,7 @@ TotalPoints.prototype.attackIncrease = function(){
   }
   $("#attack").html(this.attack);
   $("#input_attack").val(this.attack);
+  $("#attackOutput").html(23 + (2 * this.attack));
 }
 TotalPoints.prototype.attackDecrease = function(){
   this.attack--;
@@ -52,6 +61,7 @@ TotalPoints.prototype.attackDecrease = function(){
    }
   $("#attack").html(this.attack);
   $("#input_attack").val(this.attack);
+  $("#attackOutput").html(23 + (2 * this.attack));
 }
 TotalPoints.prototype.speedIncrease = function(){
   if (((this.hp+this.mp+this.attack+this.speed+this.accuracy+this.luck)<this.total) && (this.speed <=this.levelLimit)) {
@@ -59,6 +69,7 @@ TotalPoints.prototype.speedIncrease = function(){
   }
   $("#speed").html(this.speed);
   $("#input_speed").val(this.speed);
+  $("#speedOutput").html(10 * this.speed);
 }
 TotalPoints.prototype.speedDecrease = function(){
   this.speed--;
@@ -67,6 +78,7 @@ TotalPoints.prototype.speedDecrease = function(){
    }
   $("#speed").html(this.speed);
   $("#input_speed").val(this.speed);
+  $("#speedOutput").html(10 * this.speed);
 }
 TotalPoints.prototype.accuracyIncrease = function(){
   if (((this.hp+this.mp+this.attack+this.speed+this.accuracy+this.luck)<this.total) && (this.accuracy <=this.levelLimit)) {
@@ -74,6 +86,7 @@ TotalPoints.prototype.accuracyIncrease = function(){
   }
   $("#accuracy").html(this.accuracy);
   $("#input_accuracy").val(this.accuracy);
+  $("#accuracyOutput").html(10 * this.accuracy);
 }
 TotalPoints.prototype.accuracyDecrease = function(){
   this.accuracy--;
@@ -82,6 +95,7 @@ TotalPoints.prototype.accuracyDecrease = function(){
    }
   $("#accuracy").html(this.accuracy);
   $("#input_accuracy").val(this.accuracy);
+  $("#accuracyOutput").html(10 * this.accuracy);
 }
 TotalPoints.prototype.luckIncrease = function(){
   if (((this.hp+this.mp+this.attack+this.speed+this.accuracy+this.luck)<this.total) && (this.luck <=this.levelLimit)) {
@@ -89,6 +103,7 @@ TotalPoints.prototype.luckIncrease = function(){
   }
   $("#luck").html(this.luck);
   $("#input_luck").val(this.luck);
+  $("#luckOutput").html((10 * this.luck) * 0.6);
 }
 TotalPoints.prototype.luckDecrease = function(){
   this.luck--;
@@ -97,6 +112,7 @@ TotalPoints.prototype.luckDecrease = function(){
    }
   $("#luck").html(this.luck);
   $("#input_luck").val(this.luck);
+  $("#luckOutput").html((10 * this.luck) * 0.6);
 }
 TotalPoints.prototype.formChecker = function(){
   var namevar = $("#name").val();

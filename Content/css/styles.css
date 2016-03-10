@@ -34,6 +34,10 @@ select {
   border-width: 5px;
 }
 
+.footnote {
+  font-size: 15px;
+}
+
 #headshot {
   background-color: #B3ECFF;
   width: 450px;
