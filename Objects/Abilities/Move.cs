@@ -32,6 +32,7 @@ namespace Fighters
       Move blind = new Move(5, "BLIND", "executeBlind", new Punch(0, "PLACEHOLDER", 0, 0));
       Move lockon = new Move(6, "LOCKON", "executeLockon", new Punch(0, "PLACEHOLDER", 0, 0));
       Move pyro = new Move(7, "PYRO", "executePyro", new Punch(0, "PLACEHOLDER", 0, 0));
+      Move frost = new Move(8, "FROST", "executeFrost", new Punch(0,"PLACEHOLDER",0,0));
     }
 
     public string GetName()
