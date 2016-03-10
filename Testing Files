@@ -1,0 +1,42 @@
+Optimal Builds: Average rounds should be about 5
+
+Assuming Max Health starts at 140;
+with increments of 40
+
+Best possible max health is 500
+
+Best Possible Mp is 10
+
+Intital Mp is 1
+
+Best Attack is 10
+
+Intial Attack is 1
+
+Initial Attack is 10
+
+Best Possible Speed is 100
+
+Initial Speed is 10
+
+Best Possible Accuracy is 100
+
+Initial Accuracy is 10
+
+Best Possible Luck is 100
+
+Initial Luck is 10
+
+Mock Battle:
+
+Assuming Left character is 280 Hp 10 MP and 6 attack and 10 speed and 10 accuracy and 10 luck
+
+Assuming Right Character is 100 Hp and 1 mp and 1 attack and 60 speed and 100 accuracy and 100 luck
+
+First Round Input:
+
+Left Performs Burn:
+
+Right Performs: Uppercut:
+
+Result:

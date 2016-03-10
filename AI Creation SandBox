@@ -1,0 +1,106 @@
+public string AIMove()
+{
+  Fighter leftFighter = GetLeftFighter();
+  Fighter rightFighter = GetRightFighter();
+
+  if( rightFighter.GetMp() >= 5 && ((((rightFighter.GetAccuracy() - leftFighter.Speed()) + 80)>50)))
+  {
+    return "burn";
+  }
+  else if (((rightFighter.GetAccuracy() - leftFighter.GetSpeed()) < 30) && (rightFighter.GetMp() > = 2))
+  {
+    return "lockon";
+  }
+  else if ((leftFighter.GetSpeed() > 50) && (rightFighter.GetMp() >= 3))
+  {
+    return "frost";
+  }
+  else if ((((rightFighter.GetAccuracy() -leftFighter.GetSpeed()) + 100) <= 10) &&(rightFighter.GetMp() < 2))
+  {
+    return "jab";
+  }
+  else if ((rightFighter.GetHp() >= (leftFighter.GetHp() * 2)) && ((rightFighter.GetAccuracy() - leftFighter.GetSpeed()) > 50))
+  {
+    return "hook";
+  }
+  else if ((leftFighter.GetHp() <= leftFighter.GetBurn()) && (rightFighter.GetSpeed() < leftFighter.GetSpeed()))
+  {
+    return "block";
+  }
+  else if ((rightFighter.GetMp() >= 1) && ((leftFighter.GetAccuracy() - rightFighter.GetSpeed()) >60) )
+  {
+    return "blind";
+  }
+  else if (((rightFighter.GetAccuracy() - leftFighter.GetSpeed()) + 30) >=100)
+  {
+    return "uppercut";
+  }
+  else if ((rightFighter.GetLuck() >= 50) && (rightFighter.GetMp() >= 5) && ((((rightFighter.GetAccuracy() - leftFighter.Speed()) + 80)>30)))
+  {
+    return "burn";
+  }
+  else if (((rightFighter.GetAccuracy() - leftFighter.GetSpeed()) + 30) >=100)
+  {
+    return "uppercut";
+  }
+  else if ((rightFighter.GetHp() >= (leftFighter.GetHp() * 2)) && ((rightFighter.GetAccuracy() - leftFighter.GetSpeed()) < 50))
+  {
+    return "jab";
+  }
+  else if ((rightFighter.GetHp() < leftFighter.GetAttack()) && (((leftFighter.GetAccuracy() - rightFighter.GetSpeed()) +100) > 30)
+  {
+    return "uppercut";
+  }
+  else if ((rightFighter.GetHp() < rightFighter.GetMaxHp) && (leftFighter.GetHp() > rightFighter.GetHp()) && ((rightFighter.GetAccuracy() - leftFighter.GetSpeed() + 65) > 40))
+  {
+    return "hook";
+  }
+  else if ((rightFighter.GetHp() <= (rightFighter.GetMaxHp() * 0.25) && rightFighter.GetLuck() >= 40 && (leftFighter.GetHp() >= (leftFighter.GetMaxHp() * 0.5))
+  {
+    return "uppercut";
+  }
+  else
+  {
+    return "hook";
+  }
+}
+
+
+
+
+  // else if ((rightFighter.GetAccuracy() - leftFighter.GetSpeed()) < -20 && rightFighter.GetMp() >= 2)
+  // {
+  //   return "lockon";
+  // }
+  // else if ((leftFighter.GetSpeed() - rightFighter.GetSpeed()) < 0 && rightFighter.GetMp() >= 3 && (leftFighter.GetHp() >= leftFighter.GetMaxHp() * 0.5))
+  // {
+  //   return "frost";
+  // }
+  // else if (leftFighter.GetHp() <= (rightFighter.GetAttack() * 0.5) && rightFighter.GetBurn() == 0)
+  // {
+  //   return "jab";
+  // }
+  // else if (leftFighter.GetBurn() > 0 && rightFighter.GetHp() >= (rightFighter.GetHp() * 0.15) && rightFighter.GetSpeed() > leftFighter.GetSpeed())
+  // {
+  //   return "block";
+  // }
+  // else if (rightFighter.GetSpeed() > leftFighter.GetAccuracy() && rightFighter.GetSpeed() > leftFighter.GetSpeed() && leftFighter.GetAccuracy() - rightFighter.GetSpeed() > -50)
+  // {
+  //   return "blind";
+  // }
+  // else if (rightFighter.GetAccuracy() - leftFighter.GetSpeed() > 25)
+  // {
+  //   return "uppercut";
+  // }
+  // else if (leftFighter.GetHp() < (leftFighter.GetMaxHp() * 0.2))
+  // {
+  //   return "jab";
+  // }
+  // else if ((rightFighter.GetHp() <= (rightFighter.GetMaxHp() * 0.25) && rightFighter.GetLuck() >= 50)
+  // {
+  //   return "uppercut";
+  // }
+  // else if ((rightFighter.GetHp() <= (rightFighter.GetMaxHp() * 0.25) && rightFighter.GetLuck() >= 40 && (leftFighter.GetHp() >= (leftFighter.GetMaxHp() * 0.5))
+  // {
+  //   return "uppercut";
+  // }

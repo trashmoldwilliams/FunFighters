@@ -47,26 +47,26 @@ namespace Fighters
 
     public override bool Equals(System.Object otherFighter)
     {
-        if (!(otherFighter is Fighter))
-        {
-          return false;
-        }
-        else
-        {
-          Fighter newFighter = (Fighter) otherFighter;
-          bool idEquality = this.GetId() == newFighter.GetId();
-          bool nameEquality = this.GetName() == newFighter.GetName();
-          bool imageEquality = this.GetImageId() == newFighter.GetImageId();
-          bool hpEquality = this.GetHp() == newFighter.GetHp();
-          bool mpEquality = this.GetMp() == newFighter.GetMp();
-          bool attackEquality = this.GetAttack() == newFighter.GetAttack();
-          bool speedEquality = this.GetSpeed() == newFighter.GetSpeed();
-          bool accuracyEquality = this.GetAccuracy() == newFighter.GetAccuracy();
-          bool luckEquality = this.GetLuck() == newFighter.GetLuck();
-          bool maxHpEquality = this.GetMaxHp() == newFighter.GetMaxHp();
-          bool maxMpEquality = this.GetMaxMp() == newFighter.GetMaxMp();
-          return (idEquality && nameEquality && imageEquality && hpEquality && mpEquality && speedEquality && attackEquality && accuracyEquality && luckEquality && maxMpEquality && maxHpEquality);
-        }
+      if (!(otherFighter is Fighter))
+      {
+        return false;
+      }
+      else
+      {
+        Fighter newFighter = (Fighter) otherFighter;
+        bool idEquality = this.GetId() == newFighter.GetId();
+        bool nameEquality = this.GetName() == newFighter.GetName();
+        bool imageEquality = this.GetImageId() == newFighter.GetImageId();
+        bool hpEquality = this.GetHp() == newFighter.GetHp();
+        bool mpEquality = this.GetMp() == newFighter.GetMp();
+        bool attackEquality = this.GetAttack() == newFighter.GetAttack();
+        bool speedEquality = this.GetSpeed() == newFighter.GetSpeed();
+        bool accuracyEquality = this.GetAccuracy() == newFighter.GetAccuracy();
+        bool luckEquality = this.GetLuck() == newFighter.GetLuck();
+        bool maxHpEquality = this.GetMaxHp() == newFighter.GetMaxHp();
+        bool maxMpEquality = this.GetMaxMp() == newFighter.GetMaxMp();
+        return (idEquality && nameEquality && imageEquality && hpEquality && mpEquality && speedEquality && attackEquality && accuracyEquality && luckEquality && maxMpEquality && maxHpEquality);
+      }
     }
     public int GetId()
     {
