@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <fighters>
-  @foreach(var fighter in Model)
-  {
-    <fighter name="@fighter.GetName()" wins="@fighter.GetWins()" losses="@fighter.GetLosses()" healthpoints="@fighter.GetHp()" magicpoints="@fighter.GetMp()" attack="@fighter.GetAttack()" speed="@fighter.GetSpeed()" accuracy="@fighter.GetAccuracy()" luck="@fighter.GetLuck()"/>    
-  }
+    <fighter name="@Model[1].GetName()" fighterId="@Model[1].GetId()" id="player1" image="@Model[1].GetImageLocation()" wins="@Model[1].GetWins()" losses="@Model[1].GetLosses()" healthpoints="@Model[1].GetHp()" magicpoints="@Model[1].GetMp()" attack="@Model[1].GetAttack()" speed="@Model[1].GetSpeed()" accuracy="@Model[1].GetAccuracy()" luck="@Model[1].GetLuck()"/>
+    <fighter name="@Model[2].GetName()" fighterId="@Model[2].GetId()" id="player2" image="@Model[2].GetImageLocation()" wins="@Model[2].GetWins()" losses="@Model[2].GetLosses()" healthpoints="@Model[2].GetHp()" magicpoints="@Model[2].GetMp()" attack="@Model[2].GetAttack()" speed="@Model[2].GetSpeed()" accuracy="@Model[2].GetAccuracy()" luck="@Model[2].GetLuck()"/>
 </fighters>

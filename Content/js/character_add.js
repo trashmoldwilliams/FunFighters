@@ -1,4 +1,4 @@
-var TotalPoints = function(hp,mp,attack,speed,accuracy,luck,total, levelLimit){
+var TotalPoints = function(hp,mp,attack,speed,accuracy,luck,total,levelLimit){
   this.hp = hp;
   this.mp = mp;
   this.attack = attack;
@@ -98,7 +98,7 @@ TotalPoints.prototype.luckDecrease = function(){
   $("#luck").html(this.luck);
   $("#input_luck").val(this.luck);
 }
-TotalPoints.prototype.formChecker= function(){
+TotalPoints.prototype.formChecker = function(){
   var namevar = $("#name").val();
   $("#pointsRemaining").html(this.total - (this.hp+this.mp+this.attack+this.speed+this.accuracy+this.luck));
   if(((this.total - (this.hp+this.mp+this.attack+this.speed+this.accuracy+this.luck))==0) && ( namevar != "" )){
@@ -109,7 +109,7 @@ TotalPoints.prototype.formChecker= function(){
 }
 
 $(document).ready (function(){
-  var newTotalPoints = new TotalPoints(1,1,1,1,1,1,36,9);
+  var newTotalPoints = new TotalPoints(1,1,1,1,1,1,30,9);
   newTotalPoints.formChecker();
 
   $("#name").keyup(function(){
