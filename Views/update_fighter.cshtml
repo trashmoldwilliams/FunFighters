@@ -1,0 +1,173 @@
+<head>
+  <link href="../Content/css/bootstrap.css" rel="stylesheet" type="text/css">
+  <link href="../Content/css/styles.css" rel="stylesheet">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+  <script src="../Content/js/character_add.js" Stype="text/javascript"></script>
+  <title>"Fun" Fighters</title>
+</head>
+
+<h1>NEW FIGHTER</h1>
+<a href="/">Return Home</a><br>
+
+<form action="/update_fighter/@Model["fighter"].GetId()" method="post">
+  <div id="menuContainer">
+    <div class="row">
+      <div class="col-xs-6">
+        <input id="name" name="name" type="text" maxlength="16" placeholder="NAME" value="@Model["fighter"].GetName()"><br><br>
+        <span id="pointsRemainingContainer"><span id="pointsRemaining"></span><span id ="pointTextspan"> STAT POINTS REMAINING</span></span>
+        <div class="statContainer">
+          <div class="row">
+            <div class="col-xs-3">
+              <h2 title="amount of hits that can be taken before a KO">HEALTH</h2>
+            </div>
+            <div class="col-xs-1">
+              <img id="health_decrease" class="cursorHover" src="../Content/UI/left-arrow.png">
+            </div>
+            <div class="statBox col-md-2">
+              <input type="hidden" name="input_hp" id="input_hp" value="@Model["fighter"].GetHp()">
+              <span id="hp">@Model["fighter"].GetHp()</span>
+            </div>
+            <div class="col-xs-1">
+              <img id="health_increase" class="cursorHover" src="../Content/UI/right-arrow.png">
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-xs-3">
+              <h2 title="resource for performing magic attacks">MAGIC</h2>
+            </div>
+            <div class="col-xs-1">
+              <img id="magic_decrease" class="cursorHover" src="../Content/UI/left-arrow.png">
+            </div>
+            <div class="statBox col-md-2">
+              <input type="hidden" name="input_mp" id="input_mp" value="@Model["fighter"].GetMp()">
+              <span id="mp">@Model["fighter"].GetMp()</span>
+            </div>
+            <div class="col-xs-1">
+              <img id="magic_increase" class="cursorHover" src="../Content/UI/right-arrow.png">
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-xs-4">
+              <span class="footnote">*10 MAGIC unlocks BURN</span>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-xs-3">
+              <h2 title="amount of base damage dealt with melee attacks">ATTACK</h2>
+            </div>
+            <div class="col-xs-1">
+              <img id="attack_decrease" class="cursorHover" src="../Content/UI/left-arrow.png">
+            </div>
+            <div class="statBox col-md-2">
+              <input type="hidden" name="input_attack" id="input_attack" value="@Model["fighter"].GetAttack()">
+              <span id="attack">@Model["fighter"].GetAttack()</span>
+            </div>
+            <div class="col-xs-1">
+              <img id="attack_increase" class="cursorHover" src="../Content/UI/right-arrow.png">
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-xs-3">
+              <h2 title="additional percentage to evade attack, and determines which fighter moves first">SPEED</h2>
+            </div>
+            <div class="col-xs-1">
+              <img id="speed_decrease" class="cursorHover" src="../Content/UI/left-arrow.png">
+            </div>
+            <div class="statBox col-md-2">
+              <input type="hidden" name="input_speed" id="input_speed" value="@Model["fighter"].GetSpeed()">
+              <span id="speed">@Model["fighter"].GetSpeed()</span>
+            </div>
+            <div class="col-xs-1">
+              <img id="speed_increase" class="cursorHover" src="../Content/UI/right-arrow.png">
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-xs-3">
+              <h2 title="additional percentage added to the base accuracy of moves">ACCURACY</h2>
+            </div>
+            <div class="col-xs-1">
+              <img id="accuracy_decrease" class="cursorHover" src="../Content/UI/left-arrow.png">
+            </div>
+            <div class="statBox col-md-2">
+              <input type="hidden" name="input_accuracy" id="input_accuracy" value="@Model["fighter"].GetAccuracy()">
+              <span id="accuracy">@Model["fighter"].GetAccuracy()</span>
+            </div>
+            <div class="col-xs-1">
+              <img id="accuracy_increase" class="cursorHover" src="../Content/UI/right-arrow.png">
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-xs-3">
+              <h2 title="the chance that a move will be critical, and perform twice as well">LUCK</h2>
+            </div>
+            <div class="col-xs-1">
+              <img id="luck_decrease" class="cursorHover" src="../Content/UI/left-arrow.png">
+            </div>
+            <div class="statBox col-md-2">
+              <input type="hidden" name="input_luck" id="input_luck" value="@Model["fighter"].GetLuck()">
+              <span id="luck">@Model["fighter"].GetLuck()</span>
+            </div>
+            <div class="col-xs-1">
+              <img id="luck_increase" class="cursorHover" src="../Content/UI/right-arrow.png">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="rightContainer" class="col-xs-6">
+        <select name="imageSelection" id="imageSelection">
+          <option value="@Model["fighter"].GetImageId()" id="@Model["fighter"].GetImageLocation()">Current</option>
+          @{
+            foreach (var image in Model["images"])
+            {
+              <option value="@image.GetId()" id="@image.GetImageLocation()"> @image.GetName()</option>
+            }
+          }
+        </select>
+        <div id="headshot"><img src="@Model["fighter"].GetImageLocation()"></div>
+        <div id="statOutput">
+          <div class="row">
+            <div class="col-xs-6" title="amount of hits that can be taken before a KO">
+              <span>HP: <span><span id="hpOutput">140</span><span> / <span id="maxHpOutput">140</span>
+            </div>
+            <div class="col-xs-6" title="resource for performing magic attacks">
+              <span>MP: <span><span id="mpOutput">1</span><span> / <span id="maxMpOutput">1</span>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-1">
+              <img src="../Content/UI/attack.png" title="amount of base damage dealt with melee attacks">
+            </div>
+            <div class="col-xs-2">
+              <span id="attackOutput">25</span>
+            </div>
+            <div class="col-xs-1">
+              <img src="../Content/UI/speed.png" title="additional percentage to evade attack, and determines which fighter moves first">
+            </div>
+            <div class="col-xs-2">
+              <span id="speedOutput">10</span><span>%</span>
+            </div>
+            <div class="col-xs-1">
+              <img src="../Content/UI/accuracy.png" title="additional percentage added to the base accuracy of moves">
+            </div>
+            <div class="col-xs-2">
+              <span id="accuracyOutput">10</span><span>%</span>
+            </div>
+            <div class="col-xs-1">
+              <img src="../Content/UI/luck.png" title="the chance that a move will be critical, and perform twice as well">
+            </div>
+            <div class="col-xs-2">
+              <span id="luckOutput">6</span><span>%</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <button id="submitButton" type="submit">UPDATE FIGHTER</button>
+</form>
