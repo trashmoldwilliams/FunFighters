@@ -14,8 +14,8 @@ TotalPoints.prototype.hpIncrease = function(){
   }
   $("#hp").html(this.hp);
   $("#input_hp").val(this.hp);
-  $("#hpOutput").html((40 * this.hp) + 100);
-  $("#maxHpOutput").html((40 * this.hp) + 100);
+  $("#hpOutput").html((20 * this.hp) + 120);
+  $("#maxHpOutput").html((20 * this.hp) + 120);
 }
 TotalPoints.prototype.hpDecrease = function(){
   this.hp--;
@@ -24,8 +24,8 @@ TotalPoints.prototype.hpDecrease = function(){
    }
   $("#hp").html(this.hp);
   $("#input_hp").val(this.hp);
-  $("#hpOutput").html((40 * this.hp) + 100);
-  $("#maxHpOutput").html((40 * this.hp) + 100);
+  $("#hpOutput").html((20 * this.hp) + 120);
+  $("#maxHpOutput").html((20 * this.hp) + 120);
 }
 TotalPoints.prototype.mpIncrease = function(){
   if (((this.hp+this.mp+this.attack+this.speed+this.accuracy+this.luck)<this.total) && (this.mp <=this.levelLimit)) {
@@ -103,7 +103,7 @@ TotalPoints.prototype.luckIncrease = function(){
   }
   $("#luck").html(this.luck);
   $("#input_luck").val(this.luck);
-  $("#luckOutput").html((10 * this.luck) * 0.6);
+  $("#luckOutput").html((10 * this.luck) * 0.9);
 }
 TotalPoints.prototype.luckDecrease = function(){
   this.luck--;
@@ -112,7 +112,7 @@ TotalPoints.prototype.luckDecrease = function(){
    }
   $("#luck").html(this.luck);
   $("#input_luck").val(this.luck);
-  $("#luckOutput").html((10 * this.luck) * 0.6);
+  $("#luckOutput").html((10 * this.luck) * 0.9);
 }
 TotalPoints.prototype.formChecker = function(){
   var namevar = $("#name").val();

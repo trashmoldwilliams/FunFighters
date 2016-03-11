@@ -213,7 +213,17 @@ Battle.prototype.AddMoves = function (LeftMove, RightMove) {
   $("#gameLogList").html("");
   randomNumber =Math.floor((Math.random() * 100) + 1);
 
-  if(this.leftFighter.speed >= this.rightFighter.speed) {
+  if(LeftMove.id === 4) {
+    this.isFirst = this.leftFighter;
+    this.isSecond = this.rightFighter;
+    this.moveDocket.push(LeftMove);
+    this.moveDocket.push(RightMove);
+  } else if(RightMove.id === 4) {
+    this.isFirst = this.rightFighter;
+    this.isSecond = this.leftFighter;
+    this.moveDocket.push(RightMove);
+    this.moveDocket.push(LeftMove);
+  } else if(this.leftFighter.speed >= this.rightFighter.speed) {
     this.isFirst = this.leftFighter;
     this.isSecond = this.rightFighter;
     this.moveDocket.push(LeftMove);
