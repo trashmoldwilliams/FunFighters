@@ -438,34 +438,12 @@ Battle.prototype.AI = function() {
   player = this.leftFighter;
   AI = this.rightFighter;
 
-  // if(player.burn == 0 && AI.mp >= 6) {
-  //   console.log(burn);
-  //   return burn;
-  // } else if ((AI.accuracy - (player.speed *0.5) ) < -20 && AI.mp >= 2) {
-  //   console.log(lockon);
-  //   return lockon;
-  // } else if (player.hp <= (AI.attack * 0.5) && AI.burn == 0) {
-  //   console.log(jab);
-  //   return jab;
-  // } else if (player.burn > 0 && AI.hp >= (AI.hp * 0.15) && AI.speed > (player.speed *0.5) ) {
-  //   console.log(block);
-  //   return block;
-  // } else if (AI.speed > player.accuracy && AI.speed > player.speed && player.accuracy - AI.speed > -50) {
-  //   console.log(blind);
-  //   return blind;
-  // } else if (AI.accuracy - player.speed > 25) {
-  //   console.log(uppercut);
-  //   return uppercut;
-  // } else {
-  //   console.log(hook);
-  //   return hook;
-  // }
   if((AI.mp >= 6) && (AI.maxMp === 10) && ((((AI.accuracy - (player.speed *0.5) ) + 80)>50)))
   {
     console.log(burn);
     return burn;
   }
-  else if ((((player.speed)  > 50) || (player.maxHp > 350)) && (AI.mp >= 3))
+  else if ((((player.speed)  > 30) || (player.maxHp > 350)) && (AI.mp >= 3))
   {
     console.log(frost);
     return frost;
@@ -485,7 +463,7 @@ Battle.prototype.AI = function() {
     console.log(blind);
     return blind;
   }
-  else if ((AI.hp >= (player.hp * 2)) && ((AI.accuracy - (player.speed *0.5) ) > 40))
+  else if ((AI.hp >= (player.hp * 2)) && ((AI.accuracy - (player.speed *0.5) > 40)))
   {
     console.log(hook);
     return hook;
@@ -495,12 +473,12 @@ Battle.prototype.AI = function() {
     console.log(block);
     return block;
   }
-  else if (((AI.accuracy - (player.speed *0.5) ) + 30) >=100)
+  else if (((AI.accuracy - (player.speed *0.5) ) + 30) >=80)
   {
     console.log(uppercut);
     return uppercut;
   }
-  else if ((AI.luck >= 50) && (AI.mp >= 5) && ((((AI.accuracy - (player.speed *0.5) ) + 80)>30)))
+  else if ((AI.luck >= 50) && (AI.mp >= 5) && (AI.maxMp === 10) && ((((AI.accuracy - (player.speed *0.5) ) + 80)>30)))
   {
     console.log(burn);
     return burn;
@@ -520,7 +498,7 @@ Battle.prototype.AI = function() {
     console.log(uppercut);
     return uppercut;
   }
-  else if (((AI.hp * 0.5) < AI.maxHp) && (player.hp > AI.hp) && ((AI.accuracy - (player.speed *0.5)  + 65) > 40))
+  else if (((AI.hp * 0.5) < AI.maxHp) && (player.hp > AI.hp) && ((AI.accuracy - (player.speed *0.5)  + 50) > 40))
   {
     console.log(hook);
     return hook;
@@ -533,7 +511,7 @@ Battle.prototype.AI = function() {
   else
   {
     console.log(hook);
-    return hook;
+    return jab;
   }
 }
 
