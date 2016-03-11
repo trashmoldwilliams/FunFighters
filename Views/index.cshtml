@@ -14,7 +14,7 @@
       foreach(var fighter in Model){
         <div class="leaderboard">
           <img src="@fighter.GetImageLocation()"/>
-          <h2 value="@fighter.GetId()">@fighter.GetName()</h2>
+          <h2 value="@fighter.GetId()"><a href="/update/@fighter.GetId()">@fighter.GetName()</a></h2>
           <div class="leaderStats">Wins: @fighter.GetWins() Losses: @fighter.GetLosses()</div>
         </div>
       }

@@ -23,6 +23,12 @@ namespace Fighters
         List<Fighter> allFighters = Fighter.GetAll();
         return View ["index.cshtml",allFighters];
       };
+      Post["/update_fighter/{id}"] = parameters => {
+        Fighter foundFighter = Fighter.Find(parameters.id);
+        foundFighter.Update(Request.Form["name"], Request.Form["imageSelection"], Request.Form["input_hp"], Request.Form["input_mp"], Request.Form["input_attack"], Request.Form["input_speed"], Request.Form["input_accuracy"], Request.Form["input_luck"]);
+        List<Fighter> allFighters = Fighter.GetAll();
+        return View ["index.cshtml",allFighters];
+      };
       Post["/UpdateFighters"] =_ => {
         Fighter leftFighter = Fighter.Find(Request.Form["player1"]);
         leftFighter.UpdateRecord(Int32.Parse(Request.Form["player1Wins"]),Int32.Parse(Request.Form["player1Losses"]));
@@ -40,6 +46,14 @@ namespace Fighters
         returnDictionary.Add(1,player1);
         returnDictionary.Add(2,player2);
         return View["get_fighters.cshtml",returnDictionary];
+      };
+      Get["/update/{id}"]  = parameters => {
+        Fighter foundFighter = Fighter.Find(parameters.id);
+        List<Image> allImages = Image.GetAll();
+        Dictionary<string,object> returnDictionary = new Dictionary<string,object>{};
+        returnDictionary.Add("fighter", foundFighter);
+        returnDictionary.Add("images", allImages);
+        return View["update_fighter.cshtml",returnDictionary];
       };
       Get["/fight"] = _ => {
         return View["fight.cshtml",Fighter.GetAll()];

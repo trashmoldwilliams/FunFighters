@@ -125,7 +125,7 @@ TotalPoints.prototype.formChecker = function(){
 }
 
 $(document).ready (function(){
-  var newTotalPoints = new TotalPoints(1,1,1,1,1,1,30,9);
+  var newTotalPoints = new TotalPoints(parseInt($("#input_hp").val()),parseInt($("#input_mp").val()),parseInt($("#input_attack").val()),parseInt($("#input_speed").val()),parseInt($("#input_accuracy").val()),parseInt($("#input_luck").val()),30,9);
   newTotalPoints.formChecker();
 
   $("#name").keyup(function(){

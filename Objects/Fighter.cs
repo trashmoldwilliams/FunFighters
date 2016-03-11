@@ -367,6 +367,75 @@ namespace Fighters
         conn.Close();
       }
     }
+    public void Update(string Name, int ImageId, double Hp, double Mp, double Attack, double Speed, double Accuracy, double Luck)
+    {
+      SqlConnection conn = DB.Connection();
+      SqlDataReader rdr =  null;
+      conn.Open();
+
+      SqlCommand cmd = new SqlCommand("UPDATE fighters SET name = @fighterName, imageid = @fighterImage, hp = @fighterHp, mp = @fighterMp, attack = @fighterAttack, luck = @fighterLuck WHERE id = @fighter;", conn);
+
+      SqlParameter nameParameter = new SqlParameter();
+      nameParameter.ParameterName = "@fighterName";
+      nameParameter.Value = Name;
+      cmd.Parameters.Add(nameParameter);
+
+      SqlParameter ImageParameter = new SqlParameter();
+      ImageParameter.ParameterName = "@fighterImage";
+      ImageParameter.Value = ImageId;
+      cmd.Parameters.Add(ImageParameter);
+
+      SqlParameter hpParameter = new SqlParameter();
+      hpParameter.ParameterName = "@fighterHp";
+      hpParameter.Value = Hp;
+      cmd.Parameters.Add(hpParameter);
+
+      SqlParameter mpParameter = new SqlParameter();
+      mpParameter.ParameterName = "@fighterMp";
+      mpParameter.Value = Mp;
+      cmd.Parameters.Add(mpParameter);
+
+      SqlParameter attackParameter = new SqlParameter();
+      attackParameter.ParameterName = "@fighterAttack";
+      attackParameter.Value = Attack;
+      cmd.Parameters.Add(attackParameter);
+
+      SqlParameter speedParameter = new SqlParameter();
+      speedParameter.ParameterName = "@fighterSpeed";
+      speedParameter.Value = Speed;
+      cmd.Parameters.Add(speedParameter);
+
+      SqlParameter accuracyParameter = new SqlParameter();
+      accuracyParameter.ParameterName = "@fighterAccuracy";
+      accuracyParameter.Value = Accuracy;
+      cmd.Parameters.Add(accuracyParameter);
+
+      SqlParameter luckParameter = new SqlParameter();
+      luckParameter.ParameterName = "@fighterLuck";
+      luckParameter.Value = Luck;
+      cmd.Parameters.Add(luckParameter);
+
+      SqlParameter idParameter = new SqlParameter();
+      idParameter.ParameterName = "@fighter";
+      idParameter.Value = this._id;
+      cmd.Parameters.Add(idParameter);
+
+      cmd.ExecuteNonQuery();
+
+      this._name = Name;
+      this._hp = Hp;
+      this._mp = Mp;
+      this._imageId = ImageId;
+      this._attack = Attack;
+      this._speed = Speed;
+      this._accuracy = Accuracy;
+      this._luck = Luck;
+
+      if (conn != null)
+      {
+        conn.Close();
+      }
+    }
     public static List<Fighter> GetAll()
     {
       List<Fighter> allFighters = new List<Fighter>{};
