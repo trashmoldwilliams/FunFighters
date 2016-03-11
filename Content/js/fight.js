@@ -136,7 +136,7 @@ var battle = null;
 var Fighter = function(name,id,hp,mp,attack,speed,accuracy,luck,player,wins,losses){
   this.name = name.toUpperCase();
   this.id = id;
-  this.hp = (25 * hp) + 100;
+  this.hp = (20 * hp) + 120;
   this.maxHp = this.hp;
   this.mp = mp;
   this.maxMp = mp;
@@ -383,7 +383,7 @@ var executeBurn = function(User, Target) {
 
       output = Math.floor(Target.attack * 0.2);
       Target.attack = Math.floor(Target.attack * 0.8);
-      Target.burn += 25;
+      Target.burn += (Target.maxHp * 0.1);
       return output;
     }
     else {
@@ -528,7 +528,26 @@ Battle.prototype.AI = function() {
 }
 
 Battle.prototype.checkDead = function () {
-  if(this.leftFighter.hp <= 0) {
+  if(this.leftFighter.hp <= 0 && this.rightFighter.hp <= 0) {
+    $("#moveSelector").removeAttr('id');
+
+    if(this.rightFighter.speed > this.leftFighter.speed) {
+      $("#winner").html(this.rightFighter.name);
+      var posting = $.post( "/UpdateFighters", { player2:this.rightFighter.id, player2Wins:parseInt(this.rightFighter.wins)+1, player2Losses:parseInt(this.rightFighter.losses), player1:this.leftFighter.id, player1Wins:parseInt(this.leftFighter.wins), player1Losses:parseInt(this.leftFighter.losses)+1 } );
+      posting.done(function( data ) {
+        $("#fightUI").hide();
+        $("#endFightMenu").fadeIn();
+      });
+    }
+    else if(this.leftFighter.speed > this.rightFighter.speed) {
+        $("#winner").html(this.leftFighter.name);
+        var posting = $.post( "/UpdateFighters", { player2:this.leftFighter.id, player2Wins:parseInt(this.leftFighter.wins)+1, player2Losses:parseInt(this.leftFighter.losses), player1:this.rightFighter.id, player1Wins:parseInt(this.rightFighter.wins), player1Losses:parseInt(this.rightFighter.losses)+1 } );
+        posting.done(function( data ) {
+          $("#fightUI").hide();
+          $("#endFightMenu").fadeIn();
+    });
+  }
+} else if(this.leftFighter.hp <= 0) {
     $("#moveSelector").removeAttr('id');
     $("#winner").html(this.rightFighter.name);
     var posting = $.post( "/UpdateFighters", { player2:this.rightFighter.id, player2Wins:parseInt(this.rightFighter.wins)+1, player2Losses:parseInt(this.rightFighter.losses), player1:this.leftFighter.id, player1Wins:parseInt(this.leftFighter.wins), player1Losses:parseInt(this.leftFighter.losses)+1 } );
